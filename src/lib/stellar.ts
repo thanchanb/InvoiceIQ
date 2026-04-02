@@ -6,7 +6,7 @@ import * as StellarSdk from 'stellar-sdk';
 export const connectWallet = async () => {
     // Mock wallet connection for the MVP
     return {
-        address: 'GCY...TESTNET...WALLET',
+        address: 'GDVQIYIG7ABVVLN5HNTZHNXKYRQZH7JSRUGDZFMNHFJFDQBINJKBDTJN',
         network: 'TESTNET'
     };
 };

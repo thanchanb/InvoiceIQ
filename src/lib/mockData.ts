@@ -11,7 +11,7 @@ export const mockInvoices: Invoice[] = [
         dueDate: '2026-04-15',
         issuedDate: '2026-03-25',
         status: 'paid',
-        stellarWallet: 'GD...V2KJ',
+        stellarWallet: 'GDVQIYIG7ABVVLN5HNTZHNXKYRQZH7JSRUGDZFMNHFJFDQBINJKBDTJN',
     },
     {
         id: 'INV-002',
@@ -23,7 +23,7 @@ export const mockInvoices: Invoice[] = [
         dueDate: '2026-04-10',
         issuedDate: '2026-03-20',
         status: 'pending',
-        stellarWallet: 'GA...XLM1',
+        stellarWallet: 'GDYYT4276U62EGTIUJMZ23UM32AE3O4CX3ARV3PJNZI7UAFQG5GVE6VJ',
     },
     {
         id: 'INV-003',
@@ -36,6 +36,7 @@ export const mockInvoices: Invoice[] = [
         issuedDate: '2026-02-15',
         status: 'overdue',
         notes: 'Awaiting signature from client side.',
+        stellarWallet: 'GB4KBC56XM6WN7LVPMG6YLQMH2BKHWKIZHPJMMGTO3JJ3V2QL37WYKW3',
     },
     {
         id: 'INV-004',
@@ -47,6 +48,7 @@ export const mockInvoices: Invoice[] = [
         dueDate: '2026-04-20',
         issuedDate: '2026-03-28',
         status: 'paid',
+        stellarWallet: 'GBW3ZZGFSLP6XOC2FD2NKA2VULL5ILVHDGHUELFZJF7DCKRVF2K6JQTU',
     },
     {
         id: 'INV-005',
@@ -58,6 +60,7 @@ export const mockInvoices: Invoice[] = [
         dueDate: '2026-05-01',
         issuedDate: '2026-04-01',
         status: 'pending',
+        stellarWallet: 'GBZB6FEPZQIYE7IWE7KIHGB4YOBYKALMHUBIRYMMDXQIOVBJXYIFEROE',
     }
 ];
 
