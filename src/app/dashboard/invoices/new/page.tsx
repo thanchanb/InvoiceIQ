@@ -12,8 +12,7 @@ import {
     User,
     Briefcase,
     ChevronLeft,
-    CheckCircle2,
-    StellarLogo
+    CheckCircle2
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -275,13 +274,13 @@ export default function NewInvoicePage() {
     );
 }
 
-const formGroupStyle = {
+const formGroupStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     gap: '0.6rem'
 };
 
-const labelStyle = {
+const labelStyle: React.CSSProperties = {
     fontSize: '0.8rem',
     fontWeight: 700,
     color: 'var(--text-muted)',
@@ -289,7 +288,7 @@ const labelStyle = {
     textTransform: 'uppercase'
 };
 
-const inputStyle = {
+const inputStyle: React.CSSProperties = {
     background: 'rgba(255, 255, 255, 0.02)',
     padding: '0.75rem 1rem',
     borderRadius: '10px',

@@ -23,7 +23,7 @@
 ---
 
 ## 🔗 Project Links
-- **Live Demo**: [Deploying on Vercel...](https://invoiceiq-delta.vercel.app/) (*Note: Link will be updated upon final deployment*)
+- **Live Demo**: [https://invoice-iq-dashboard.vercel.app](https://invoice-iq-dashboard.vercel.app)
 - **Demo Video**: [Full MVP Functionality Walkthrough](https://youtu.be/sample-invoiceiq-demo) (*Note: Sample URL for documentation structure*)
 - **Architecture Document**: [View ARCHITECTURE.md](./ARCHITECTURE.md)
 
