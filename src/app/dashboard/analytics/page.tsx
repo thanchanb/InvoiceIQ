@@ -1,179 +1,175 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    ResponsiveContainer,
-    PieChart,
-    Pie,
-    Cell,
-    LineChart,
-    Line,
-    AreaChart,
-    Area
-} from 'recharts';
-import {
-    mockClientStats,
-    mockEarningTrends,
-    mockUserStats
-} from '@/lib/mockData';
-import {
-    TrendingUp,
-    Users,
-    Calendar,
-    Award,
-    ArrowUpRight,
-    TrendingDown,
-    Info
+    TrendingUp, BarChart2, PieChart as PieIcon, DollarSign, FileText
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import {
+    AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
+    XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
+} from 'recharts';
+import Link from 'next/link';
+import { getDashboardStats, getInvoices, type Invoice } from '@/lib/store';
 
 const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ec4899', '#06b6d4'];
 
 export default function AnalyticsPage() {
+    const [stats, setStats] = useState<ReturnType<typeof getDashboardStats> | null>(null);
+    const [invoices, setInvoices] = useState<Invoice[]>([]);
+
+    const load = useCallback(() => {
+        setStats(getDashboardStats());
+        setInvoices(getInvoices());
+    }, []);
+
+    useEffect(() => {
+        load();
+        window.addEventListener('storage', load);
+        return () => window.removeEventListener('storage', load);
+    }, [load]);
+
+    if (!stats) return null;
+
+    const hasData = invoices.length > 0;
+    const statusDist = [
+        { name: 'Paid', value: stats.paidCount, color: '#10b981' },
+        { name: 'Pending', value: stats.pendingCount, color: '#f59e0b' },
+        { name: 'Overdue', value: stats.overdueCount, color: '#ef4444' },
+        { name: 'Draft', value: stats.draftCount, color: '#94a3b8' },
+    ].filter(d => d.value > 0);
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             <header>
-                <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>Income Analytics</h1>
-                <p style={{ color: 'var(--text-secondary)' }}>Deep dive into your earning patterns and client performance.</p>
+                <h1 style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>Analytics</h1>
+                <p style={{ color: 'var(--text-secondary)' }}>
+                    {hasData
+                        ? `${invoices.length} invoice${invoices.length !== 1 ? 's' : ''} · all figures derived from your real data`
+                        : 'Your analytics will appear here once you create invoices.'}
+                </p>
             </header>
 
-            {/* Analytics Grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '2rem' }}>
-
-                {/* Client Performance */}
-                <div className="glass" style={{ padding: '2rem', minHeight: '450px', display: 'flex', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                        <h3 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                            <Users size={20} color="var(--primary-color)" /> Client Revenue Distribution
-                        </h3>
+            {/* Empty state */}
+            {!hasData && (
+                <div className="neo-raised" style={{ padding: '5rem 3rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem', textAlign: 'center' }}>
+                    <div style={{ width: '80px', height: '80px', borderRadius: '24px', background: 'rgba(99,102,241,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--accent-indigo)' }}>
+                        <TrendingUp size={36} />
                     </div>
-
-                    <div style={{ flex: 1 }}>
-                        <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={mockClientStats} layout="vertical" margin={{ left: 40, right: 40 }}>
-                                <XAxis type="number" hide />
-                                <YAxis
-                                    dataKey="name"
-                                    type="category"
-                                    axisLine={false}
-                                    tickLine={false}
-                                    tick={{ fill: 'var(--text-secondary)', fontSize: 13, fontWeight: 500 }}
-                                />
-                                <Tooltip
-                                    cursor={{ fill: 'rgba(255,255,255,0.02)' }}
-                                    contentStyle={{
-                                        background: 'rgba(23, 23, 26, 0.95)',
-                                        border: '1px solid var(--glass-border)',
-                                        borderRadius: '12px',
-                                        color: 'white'
-                                    }}
-                                />
-                                <Bar
-                                    dataKey="totalPaid"
-                                    fill="var(--primary-color)"
-                                    radius={[0, 10, 10, 0]}
-                                    barSize={20}
-                                >
-                                    {mockClientStats.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                                    ))}
-                                </Bar>
-                            </BarChart>
-                        </ResponsiveContainer>
-                    </div>
-                </div>
-
-                {/* Financial Health Score (Detailed) */}
-                <div className="glass" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, transparent 100%)' }}>
-                    <h3 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <Award size={20} color="var(--accent-color)" /> Financial Health
-                    </h3>
-
-                    <div style={{ textAlign: 'center', padding: '1rem 0' }}>
-                        <div style={{
-                            width: '120px',
-                            height: '120px',
-                            borderRadius: '50%',
-                            border: '8px solid rgba(255,255,255,0.03)',
-                            borderTopColor: 'var(--primary-color)',
-                            margin: '0 auto',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            position: 'relative'
-                        }}>
-                            <span style={{ fontSize: '2rem', fontWeight: 800 }}>84</span>
-                            <span style={{ position: 'absolute', bottom: '-20px', fontSize: '0.75rem', fontWeight: 700, color: 'var(--primary-color)' }}>OPTIMIZED</span>
-                        </div>
-                    </div>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <HealthMetric label="Income Diversity" score={92} />
-                        <HealthMetric label="Payment Punctuality" score={78} />
-                        <HealthMetric label="Project Profitability" score={88} />
-                    </div>
-
-                    <div className="glass" style={{ padding: '1.25rem', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(99, 102, 241, 0.1)' }}>
-                        <p style={{ fontSize: '0.875rem', color: 'var(--primary-color)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                            <Info size={16} /> Strategy Tip
-                        </p>
-                        <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-                            Your reliance on 1 client (Acme Corp) is 35%. Good diversity, but try to find one more enterprise client this quarter.
+                    <div>
+                        <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>No data yet</h2>
+                        <p style={{ color: 'var(--text-secondary)', maxWidth: '400px' }}>
+                            Create and manage invoices to see your financial analytics here.
                         </p>
                     </div>
+                    <Link href="/dashboard/invoices/new" style={{ padding: '0.85rem 2rem', background: 'var(--primary-color)', color: 'white', borderRadius: '12px', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                        <FileText size={18} /> Create First Invoice
+                    </Link>
                 </div>
-            </div>
+            )}
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '2rem' }}>
-                <div className="glass" style={{ padding: '2rem' }}>
-                    <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 700, marginBottom: '1rem', textTransform: 'uppercase' }}>Best Month</h4>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <p style={{ fontSize: '2rem', fontWeight: 800 }}>APRIL</p>
-                        <div style={{ padding: '0.25rem 0.6rem', borderRadius: '6px', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--secondary-color)', fontSize: '0.75rem', fontWeight: 700 }}>+24% vs avg</div>
+            {hasData && (
+                <>
+                    {/* KPI Strip */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}>
+                        {[
+                            { label: 'Total Invoiced', value: (stats.totalEarned + stats.pendingAmount + stats.overdueAmount).toLocaleString(), suffix: '', icon: <DollarSign size={18} />, color: 'var(--accent-indigo)' },
+                            { label: 'Total Collected', value: stats.totalEarned.toLocaleString(), suffix: '', icon: <TrendingUp size={18} />, color: 'var(--accent-green)' },
+                            { label: 'Pending', value: stats.pendingAmount.toLocaleString(), suffix: '', icon: <BarChart2 size={18} />, color: 'var(--accent-amber)' },
+                            { label: 'Health Score', value: String(stats.healthScore), suffix: '/100', icon: <PieIcon size={18} />, color: stats.healthScore >= 70 ? 'var(--accent-green)' : 'var(--accent-amber)' },
+                        ].map(kpi => (
+                            <div key={kpi.label} className="neo-raised" style={{ padding: '1.75rem', position: 'relative', overflow: 'hidden' }}>
+                                <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '2px', background: kpi.color }} />
+                                <div style={{ color: kpi.color, marginBottom: '1rem' }}>{kpi.icon}</div>
+                                <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '0.35rem' }}>{kpi.label}</p>
+                                <p className="mono" style={{ fontSize: '1.6rem', fontWeight: 800 }}>
+                                    {kpi.value}<span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginLeft: '2px' }}>{kpi.suffix}</span>
+                                </p>
+                            </div>
+                        ))}
                     </div>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.5rem' }}>Consistent peak in Q2 each year.</p>
-                </div>
 
-                <div className="glass" style={{ padding: '2rem' }}>
-                    <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 700, marginBottom: '1rem', textTransform: 'uppercase' }}>Avg. Project Fee</h4>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <p style={{ fontSize: '2rem', fontWeight: 800 }}>$3,840</p>
-                        <div style={{ padding: '0.25rem 0.6rem', borderRadius: '6px', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--secondary-color)', fontSize: '0.75rem', fontWeight: 700 }}>+12% vs LY</div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+                        {/* Revenue trend */}
+                        <section className="neo-raised" style={{ padding: '2rem' }}>
+                            <h3 style={{ fontSize: '1.1rem', marginBottom: '1.75rem' }}>Revenue by Month (Paid Invoices)</h3>
+                            {stats.earningTrend.every(d => d.amount === 0) ? (
+                                <div style={{ height: '250px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', textAlign: 'center' }}>
+                                        Mark invoices as <strong>paid</strong> to see your revenue trend.
+                                    </p>
+                                </div>
+                            ) : (
+                                <ResponsiveContainer width="100%" height={250}>
+                                    <AreaChart data={stats.earningTrend}>
+                                        <defs>
+                                            <linearGradient id="rev" x1="0" y1="0" x2="0" y2="1">
+                                                <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
+                                                <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                                            </linearGradient>
+                                        </defs>
+                                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.04)" />
+                                        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} />
+                                        <YAxis hide />
+                                        <Tooltip contentStyle={{ background: 'var(--surface-color)', border: '0.5px solid rgba(99,102,241,0.2)', borderRadius: '10px', color: 'var(--text-primary)' }} />
+                                        <Area type="monotone" dataKey="amount" stroke="#6366f1" strokeWidth={3} fill="url(#rev)" />
+                                    </AreaChart>
+                                </ResponsiveContainer>
+                            )}
+                        </section>
+
+                        {/* Status distribution */}
+                        <section className="neo-raised" style={{ padding: '2rem' }}>
+                            <h3 style={{ fontSize: '1.1rem', marginBottom: '1.75rem' }}>Invoice Status</h3>
+                            {statusDist.length === 0 ? (
+                                <div style={{ height: '250px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem' }}>No invoices yet.</p>
+                                </div>
+                            ) : (
+                                <>
+                                    <ResponsiveContainer width="100%" height={180}>
+                                        <PieChart>
+                                            <Pie data={statusDist} cx="50%" cy="50%" innerRadius={55} outerRadius={80} dataKey="value" paddingAngle={4}>
+                                                {statusDist.map((entry, i) => <Cell key={i} fill={entry.color} />)}
+                                            </Pie>
+                                            <Tooltip contentStyle={{ background: 'var(--surface-color)', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '10px' }} />
+                                        </PieChart>
+                                    </ResponsiveContainer>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '1.25rem' }}>
+                                        {statusDist.map(d => (
+                                            <div key={d.name} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.85rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: d.color }} />
+                                                    {d.name}
+                                                </div>
+                                                <span style={{ fontWeight: 700 }}>{d.value}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                        </section>
                     </div>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.5rem' }}>Yielding highest per hour on Consulting.</p>
-                </div>
 
-                <div className="glass" style={{ padding: '2rem' }}>
-                    <h4 style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 700, marginBottom: '1rem', textTransform: 'uppercase' }}>Retention Rate</h4>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        <p style={{ fontSize: '2rem', fontWeight: 800 }}>92%</p>
-                        <div style={{ padding: '0.25rem 0.6rem', borderRadius: '6px', background: 'rgba(16, 185, 129, 0.1)', color: 'var(--secondary-color)', fontSize: '0.75rem', fontWeight: 700 }}>Excellent</div>
-                    </div>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.5rem' }}>11/12 clients returned for new work.</p>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function HealthMetric({ label, score }: { label: string, score: number }) {
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
-                <span style={{ color: 'var(--text-secondary)' }}>{label}</span>
-                <span style={{ fontWeight: 700 }}>{score}%</span>
-            </div>
-            <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.03)', borderRadius: '3px', overflow: 'hidden' }}>
-                <div
-                    style={{ width: `${score}%`, height: '100%', background: score > 85 ? 'var(--secondary-color)' : 'var(--primary-color)', borderRadius: '3px' }}
-                />
-            </div>
+                    {/* Top clients bar chart */}
+                    {stats.clientStats.length > 0 && (
+                        <section className="neo-raised" style={{ padding: '2rem' }}>
+                            <h3 style={{ fontSize: '1.1rem', marginBottom: '1.75rem' }}>Top Clients by Revenue Collected</h3>
+                            <ResponsiveContainer width="100%" height={220}>
+                                <BarChart data={stats.clientStats} layout="vertical">
+                                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="rgba(255,255,255,0.04)" />
+                                    <XAxis type="number" hide />
+                                    <YAxis type="category" dataKey="name" width={120} axisLine={false} tickLine={false} tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} />
+                                    <Tooltip contentStyle={{ background: 'var(--surface-color)', border: '0.5px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'var(--text-primary)' }} />
+                                    <Bar dataKey="totalPaid" name="Revenue" radius={[0, 6, 6, 0]}>
+                                        {stats.clientStats.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </section>
+                    )}
+                </>
+            )}
         </div>
     );
 }
