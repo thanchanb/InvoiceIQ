@@ -11,14 +11,31 @@ import {
     ChevronRight,
     ChevronLeft,
     Mail,
-    Copy
+    Copy,
+    Activity
 } from 'lucide-react';
 import { mockInvoices } from '@/lib/mockData';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { verifyPayment } from '@/lib/stellar';
+import { RefreshCw, CheckCircle2 } from 'lucide-react';
 
 export default function InvoicesPage() {
     const [filter, setFilter] = useState('all');
+    const [verifying, setVerifying] = useState<string | null>(null);
+
+    const handleVerify = async (id: string, wallet: string) => {
+        setVerifying(id);
+        const isPaid = await verifyPayment(id, wallet);
+        setTimeout(() => {
+            setVerifying(null);
+            if (isPaid) {
+                alert(`Payment confirmed for ${id}! In a real app, this would update the status.`);
+            } else {
+                alert(`No transaction found with memo "${id}" for wallet ${wallet.slice(0, 8)}...`);
+            }
+        }, 1500);
+    };
 
     const filteredInvoices = filter === 'all'
         ? mockInvoices
@@ -140,7 +157,32 @@ export default function InvoicesPage() {
                                     </span>
                                 </td>
                                 <td style={{ padding: '1.25rem 2rem' }}>
-                                    <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                                        {inv.status === 'pending' && (
+                                            <button
+                                                onClick={() => handleVerify(inv.id, inv.stellarWallet!)}
+                                                className="glass"
+                                                disabled={verifying === inv.id}
+                                                style={{
+                                                    padding: '0.4rem 0.8rem',
+                                                    fontSize: '0.75rem',
+                                                    fontWeight: 700,
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: '0.4rem',
+                                                    color: 'var(--accent-amber)',
+                                                    border: '1px solid rgba(245, 158, 11, 0.2)',
+                                                    cursor: verifying === inv.id ? 'wait' : 'pointer'
+                                                }}
+                                            >
+                                                {verifying === inv.id ? (
+                                                    <RefreshCw size={14} className="animate-spin" />
+                                                ) : (
+                                                    <Activity size={14} />
+                                                )}
+                                                VERIFY
+                                            </button>
+                                        )}
                                         <button style={{ color: 'var(--text-muted)' }} title="Download PDF"><Download size={18} /></button>
                                         <button style={{ color: 'var(--text-muted)' }} title="Send Email"><Mail size={18} /></button>
                                         <button style={{ color: 'var(--text-muted)' }} title="Copy Invoice Link"><Copy size={18} /></button>

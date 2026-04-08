@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Outfit } from 'next/font/google';
 import './globals.css';
+import { Providers } from '@/components/Providers';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -19,7 +20,6 @@ export const metadata: Metadata = {
   description: 'The intelligent financial command center for freelancers. Track income, send invoices, and analyze your growth on the Stellar network.',
   keywords: 'invoicing, stellar, freelancers, analytics, finance, crypto payments',
   authors: [{ name: 'InvoiceIQ Team' }],
-  viewport: 'width=device-width, initial-scale=1',
 };
 
 export default function RootLayout({
@@ -30,9 +30,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body>
-        <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
-          {children}
-        </div>
+        <Providers>
+          <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

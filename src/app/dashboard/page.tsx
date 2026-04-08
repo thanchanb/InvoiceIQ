@@ -1,19 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     DollarSign,
     CheckCircle,
     AlertCircle,
-    TrendingUp,
-    ChevronRight,
-    ArrowUpRight,
-    ArrowDownRight,
-    MoreVertical,
     Activity,
     Zap,
     Target,
-    ShieldCheck
+    ShieldCheck,
+    ChevronRight,
+    ArrowUpRight,
+    ArrowDownRight,
+    RefreshCw,
+    ExternalLink
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import {
@@ -26,6 +26,8 @@ import {
     ResponsiveContainer
 } from 'recharts';
 import Link from 'next/link';
+import { useWallet } from '@/context/WalletContext';
+import { getAccountBalance, fetchTransactionHistory } from '@/lib/stellar';
 
 const mockEarningData = [
     { month: 'Oct', amount: 3200 },
@@ -44,17 +46,46 @@ const mockRecentInvoices = [
 ];
 
 export default function DashboardOverview() {
+    const { address, isConnected } = useWallet();
+    const [balance, setBalance] = useState('0.00');
+    const [transactions, setTransactions] = useState<any[]>([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const loadBlockchainData = async () => {
+            if (isConnected && address) {
+                setLoading(true);
+                try {
+                    const [bal, txs] = await Promise.all([
+                        getAccountBalance(address),
+                        fetchTransactionHistory(address)
+                    ]);
+                    setBalance(bal);
+                    setTransactions(txs);
+                } catch (err) {
+                    console.error("Dashboard data load error:", err);
+                } finally {
+                    setLoading(false);
+                }
+            }
+        };
+        loadBlockchainData();
+    }, [address, isConnected]);
+
+    const displayBalance = isConnected ? `${parseFloat(balance).toFixed(2)} XLM` : '$42,500.00';
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
 
-            {/* 4 Hero Metric Cards (Mono Numbers) */}
+            {/* 4 Hero Metric Cards */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2rem' }}>
                 <HeroCard
-                    title="Total Earned"
-                    value="$42,500.00"
-                    trend="+12.5%"
-                    isPositive={true}
-                    icon={<DollarSign size={22} />}
+                    title={isConnected ? "Testnet Balance" : "Total Earned"}
+                    value={displayBalance}
+                    trend={isConnected ? null : "+12.5%"}
+                    isPositive={isConnected ? null : true}
+                    icon={isConnected ? <RefreshCw className={loading ? 'animate-spin' : ''} size={22} /> : <DollarSign size={22} />}
+                    isLive={isConnected}
                 />
                 <HeroCard
                     title="Invoices Paid"
@@ -62,7 +93,6 @@ export default function DashboardOverview() {
                     trend="+4"
                     isPositive={true}
                     icon={<CheckCircle size={22} />}
-                    hasSparkline={true}
                 />
                 <HeroCard
                     title="Overdue"
@@ -78,12 +108,10 @@ export default function DashboardOverview() {
                     trend="Steady"
                     isPositive={null}
                     icon={<Activity size={22} />}
-                    isGauge={true}
                 />
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1.2fr', gap: '3rem' }}>
-                {/* Financial Health Panel (Arc Gauge) */}
                 <section className="neo-raised" style={{ padding: '2.5rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
                         <div>
@@ -106,7 +134,7 @@ export default function DashboardOverview() {
                                 strokeWidth="18"
                                 strokeLinecap="round"
                                 initial={{ strokeDasharray: '314 314', strokeDashoffset: '314' }}
-                                animate={{ strokeDashoffset: '50' }} // ~84%
+                                animate={{ strokeDashoffset: '50' }}
                                 transition={{ duration: 1.5, ease: 'easeOut' }}
                             />
                             <defs>
@@ -123,7 +151,7 @@ export default function DashboardOverview() {
                         </div>
                     </div>
 
-                    <div style={{ padding: '1.2rem 1.5rem', background: 'var(--surface-color)', borderRadius: '12px', border: '0.5px solid rgba(245, 166, 35, 0.2)' }} className="neo-inset">
+                    <div className="neo-inset" style={{ padding: '1.2rem 1.5rem', background: 'var(--surface-color)', borderRadius: '12px' }}>
                         <p style={{ fontSize: '0.85rem', color: 'var(--accent-amber)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                             <Zap size={16} fill="var(--accent-amber)" />
                             <span>Smart Tip: You rely on 1 client for 80% of income — time to diversify.</span>
@@ -131,7 +159,6 @@ export default function DashboardOverview() {
                     </div>
                 </section>
 
-                {/* Best Clients (Ranked List) */}
                 <section className="neo-raised" style={{ padding: '2rem' }}>
                     <h3 style={{ fontSize: '1.1rem', marginBottom: '2.5rem' }}>Terminal Top Clients</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
@@ -143,7 +170,7 @@ export default function DashboardOverview() {
                 </section>
             </div>
 
-            {/* Earnings Chart (Smooth Area Chart) */}
+            {/* Earnings Chart */}
             <section className="neo-raised" style={{ padding: '2.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
                     <h3 style={{ fontSize: '1.1rem' }}>Revenue Terminal</h3>
@@ -167,9 +194,7 @@ export default function DashboardOverview() {
                                 tickLine={false}
                                 tick={{ fill: 'var(--text-secondary)', fontSize: 12, fontFamily: 'JetBrains Mono' }}
                             />
-                            <YAxis
-                                hide
-                            />
+                            <YAxis hide />
                             <Tooltip
                                 contentStyle={{
                                     background: 'var(--surface-color)',
@@ -194,10 +219,10 @@ export default function DashboardOverview() {
                 </div>
             </section>
 
-            {/* Inset Table: Recent Invoices */}
+            {/* Inset Table: Real Transactions or Mock Invoices */}
             <section className="neo-inset" style={{ padding: '2.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
-                    <h3 style={{ fontSize: '1.1rem' }}>Latest Transmissions</h3>
+                    <h3 style={{ fontSize: '1.1rem' }}>{isConnected ? 'On-Chain Activity' : 'Latest Transmissions'}</h3>
                     <Link href="/dashboard/invoices" style={{ fontSize: '0.85rem', color: 'var(--accent-green)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                         VIEW_ALL_RECORDS <ChevronRight size={14} />
                     </Link>
@@ -205,88 +230,102 @@ export default function DashboardOverview() {
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                     <thead>
                         <tr style={{ textAlign: 'left', borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
-                            <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">ENTITY</th>
-                            <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">UID</th>
+                            <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">{isConnected ? 'HASH' : 'ENTITY'}</th>
+                            <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">{isConnected ? 'LEDGER' : 'UID'}</th>
                             <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">TIMESTAMP</th>
-                            <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">VOLUME</th>
-                            <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">STATUS</th>
+                            <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">{isConnected ? 'FEE' : 'VOLUME'}</th>
+                            <th style={{ paddingBottom: '1.2rem', fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 600 }} className="mono">ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {mockRecentInvoices.map(invoice => (
-                            <tr key={invoice.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.03)' }}>
-                                <td style={{ padding: '1.5rem 0' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                        <div style={{
-                                            width: '32px',
-                                            height: '32px',
-                                            borderRadius: '50%',
-                                            background: 'var(--surface-color)',
-                                            boxShadow: '4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light)',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center',
-                                            fontSize: '0.75rem',
-                                            fontWeight: 700
-                                        }}>
-                                            {invoice.initials}
+                        {isConnected ? (
+                            transactions.map((tx: any) => (
+                                <tr key={tx.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.03)' }}>
+                                    <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--accent-green)' }}>
+                                        {tx.hash.slice(0, 8)}...
+                                    </td>
+                                    <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>#{tx.ledger_attr}</td>
+                                    <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{new Date(tx.created_at).toLocaleDateString()}</td>
+                                    <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.9rem', fontWeight: 700 }}>{tx.fee_charged} XLM</td>
+                                    <td style={{ padding: '1.5rem 0' }}>
+                                        <a href={`https://stellar.expert/explorer/testnet/tx/${tx.hash}`} target="_blank" className="badge-neo badge-paid" style={{ display: 'flex', gap: '0.4rem', alignItems: 'center', width: 'fit-content' }}>
+                                            DETAILS <ExternalLink size={12} />
+                                        </a>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            mockRecentInvoices.map((invoice: any) => (
+                                <tr key={invoice.id} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.03)' }}>
+                                    <td style={{ padding: '1.5rem 0' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <div style={{
+                                                width: '32px',
+                                                height: '32px',
+                                                borderRadius: '50%',
+                                                background: 'var(--surface-color)',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'center',
+                                                fontSize: '0.75rem',
+                                                fontWeight: 700,
+                                                boxShadow: '4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light)'
+                                            }}>
+                                                {invoice.initials}
+                                            </div>
+                                            <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>{invoice.client}</span>
                                         </div>
-                                        <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>{invoice.client}</span>
-                                    </div>
-                                </td>
-                                <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{invoice.id}</td>
-                                <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{invoice.date}</td>
-                                <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.9rem', fontWeight: 700 }}>${invoice.amount.toLocaleString()}</td>
-                                <td style={{ padding: '1.5rem 0' }}>
-                                    <span className={`badge-neo badge-${invoice.status}`}>
-                                        {invoice.status.toUpperCase()}
-                                    </span>
-                                </td>
-                            </tr>
-                        ))}
+                                    </td>
+                                    <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{invoice.id}</td>
+                                    <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{invoice.date}</td>
+                                    <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.9rem', fontWeight: 700 }}>${invoice.amount.toLocaleString()}</td>
+                                    <td style={{ padding: '1.5rem 0' }}>
+                                        <span className={`badge-neo badge-${invoice.status}`}>
+                                            {invoice.status.toUpperCase()}
+                                        </span>
+                                    </td>
+                                </tr>
+                            ))
+                        )}
                     </tbody>
                 </table>
             </section>
-
         </div>
     );
 }
 
-function HeroCard({ title, value, trend, isPositive, icon, isPulsing = false, hasSparkline = false, isGauge = false }: any) {
+function HeroCard({ title, value, trend, isPositive, icon, isPulsing = false, isLive = false }: any) {
     return (
-        <div className={`neo-raised ${isPulsing ? 'glow-red' : ''}`} style={{
+        <div className={`neo-raised ${isPulsing ? 'glow-red' : ''} ${isLive ? 'glow-green' : ''}`} style={{
             padding: '2rem',
             display: 'flex',
             flexDirection: 'column',
             overflow: 'hidden',
             position: 'relative'
         }}>
-            {/* Active Glow Bar */}
-            <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '2px', background: isPositive ? 'var(--accent-green)' : (isPositive === false ? 'var(--accent-red)' : 'var(--accent-indigo)'), boxShadow: `0 0 10px ${isPositive ? 'var(--accent-green)' : 'var(--text-muted)'}`, opacity: 0.8 }} />
+            <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '2px', background: isLive ? 'var(--accent-green)' : (isPositive ? 'var(--accent-green)' : (isPositive === false ? 'var(--accent-red)' : 'var(--accent-indigo)')), opacity: 0.8 }} />
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                <div style={{
-                    color: isPositive === null ? 'var(--accent-indigo)' : (isPositive ? 'var(--accent-green)' : 'var(--accent-red)'),
-                }}>
+                <div style={{ color: isLive ? 'var(--accent-green)' : (isPositive === null ? 'var(--accent-indigo)' : (isPositive ? 'var(--accent-green)' : 'var(--accent-red)')) }}>
                     {icon}
                 </div>
                 {trend && (
                     <div style={{
                         fontSize: '0.75rem',
                         fontWeight: 700,
-                        color: isPositive === null ? 'var(--text-muted)' : (isPositive ? 'var(--accent-green)' : 'var(--accent-red)'),
+                        color: isPositive ? 'var(--accent-green)' : 'var(--accent-red)',
                         display: 'flex',
                         alignItems: 'center',
                         gap: '0.2rem'
                     }} className="mono">
-                        {isPositive !== null && (isPositive ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />)}
+                        {isPositive ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
                         {trend}
                     </div>
                 )}
             </div>
 
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: 600, marginBottom: '0.4rem' }}>{title}</p>
-            <p className="mono" style={{ fontSize: '1.75rem', fontWeight: 800 }}>{value}</p>
+            <p className="mono" style={{ fontSize: '1.5rem', fontWeight: 800 }}>{value}</p>
 
             {isPulsing && (
                 <motion.div

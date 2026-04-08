@@ -11,7 +11,11 @@ import {
     Settings,
     LogOut,
     Hexagon,
-    MessageSquareShare
+    MessageSquareShare,
+    BarChart2,
+    Activity,
+    ShieldCheck,
+    Zap
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -20,6 +24,10 @@ const mainMenuItems = [
     { name: 'Invoices', icon: FileText, href: '/dashboard/invoices' },
     { name: 'Clients', icon: Users, href: '/dashboard/clients' },
     { name: 'Analytics', icon: TrendingUp, href: '/dashboard/analytics' },
+    { name: 'Metrics', icon: BarChart2, href: '/dashboard/metrics' },
+    { name: 'Monitoring', icon: Activity, href: '/dashboard/monitoring' },
+    { name: 'Security', icon: ShieldCheck, href: '/dashboard/security' },
+    { name: 'Gasless', icon: Zap, href: '/dashboard/gasless' },
     { name: 'Feedback', icon: MessageSquareShare, href: '/dashboard/feedback' },
     { name: 'Settings', icon: Settings, href: '/dashboard/settings' },
 ];

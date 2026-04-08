@@ -2,9 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { Bell, Search, Moon, Sun, Clock } from 'lucide-react';
+import { Bell, Search, Moon, Sun, Clock, Wallet } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
+import { useWallet } from '@/context/WalletContext';
 
 export default function DashboardLayout({
     children,
@@ -12,6 +13,7 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
+    const { address, isConnected, connect, disconnect } = useWallet();
     const [currentTime, setCurrentTime] = useState('09:41 AM');
 
     useEffect(() => {
@@ -23,6 +25,10 @@ export default function DashboardLayout({
         updateTime();
         return () => clearInterval(timer);
     }, []);
+
+    const truncateAddress = (addr: string) => {
+        return `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+    };
 
     return (
         <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--bg-color)' }}>
@@ -51,43 +57,16 @@ export default function DashboardLayout({
                 }}>
                     <div>
                         <h2 style={{ fontSize: '1.25rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                            <span style={{ color: 'var(--text-secondary)' }}>Good morning, Rahul</span>
+                            <span style={{ color: 'var(--text-secondary)' }}>Welcome to Terminal</span>
                             <span style={{ color: 'var(--text-muted)', fontSize: '1.1rem', fontWeight: 400 }}>— {currentTime}</span>
                         </h2>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '3rem' }}>
-                        {/* Neomorphic Light/Dark Toggle */}
-                        <div style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '0.4rem',
-                            padding: '0.4rem',
-                            borderRadius: '100px',
-                            background: 'var(--surface-color)',
-                            boxShadow: 'inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light)'
-                        }}>
-                            <motion.div
-                                style={{
-                                    width: '32px',
-                                    height: '32px',
-                                    borderRadius: '50%',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    color: 'var(--accent-amber)',
-                                    background: 'var(--surface-color)',
-                                    boxShadow: '4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light)'
-                                }}
-                            >
-                                <Moon size={16} fill="currentColor" />
-                            </motion.div>
-                        </div>
-
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
                         {/* Search Bar (Inset) */}
                         <div style={{
                             position: 'relative',
-                            width: '320px',
+                            width: '280px',
                             display: 'flex',
                             alignItems: 'center'
                         }} className="neo-inset">
@@ -104,39 +83,73 @@ export default function DashboardLayout({
                                     boxShadow: 'none',
                                     paddingLeft: '3.2rem',
                                     paddingRight: '1rem',
-                                    height: '44px',
-                                    fontSize: '0.9rem'
+                                    height: '42px',
+                                    fontSize: '0.85rem'
                                 }}
                             />
                         </div>
 
+                        {/* Wallet Area */}
+                        {isConnected ? (
+                            <div style={{ display: 'flex', gap: '1rem' }}>
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    onClick={disconnect}
+                                    style={{
+                                        padding: '0.6rem 1.25rem',
+                                        borderRadius: '12px',
+                                        fontSize: '0.85rem',
+                                        fontWeight: 700,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.75rem',
+                                        color: 'var(--accent-green)',
+                                        border: '1px solid rgba(0, 255, 178, 0.2)',
+                                        background: 'rgba(0, 255, 178, 0.03)'
+                                    }}
+                                    className="mono"
+                                >
+                                    <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-green)', boxShadow: '0 0 10px var(--accent-green)' }} />
+                                    {truncateAddress(address!)}
+                                </motion.button>
+                            </div>
+                        ) : (
+                            <motion.button
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={connect}
+                                style={{
+                                    padding: '0.6rem 1.5rem',
+                                    borderRadius: '12px',
+                                    fontSize: '0.85rem',
+                                    fontWeight: 800,
+                                    background: 'var(--primary-color)',
+                                    color: 'white',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.75rem',
+                                    boxShadow: '0 10px 20px -5px rgba(99, 102, 241, 0.3)'
+                                }}
+                            >
+                                <Wallet size={16} />
+                                CONNECT WALLET
+                            </motion.button>
+                        )}
+
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                             <motion.button
                                 whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
                                 style={{
-                                    width: '44px',
-                                    height: '44px',
+                                    width: '42px',
+                                    height: '42px',
                                     borderRadius: '12px',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    justifyContent: 'center',
-                                    position: 'relative'
+                                    justifyContent: 'center'
                                 }}
                                 className="neo-button"
                             >
-                                <Bell size={20} strokeWidth={2.5} />
-                                <span style={{
-                                    position: 'absolute',
-                                    top: '10px',
-                                    right: '10px',
-                                    width: '8px',
-                                    height: '8px',
-                                    background: 'var(--accent-red)',
-                                    borderRadius: '50%',
-                                    border: '2px solid var(--bg-color)',
-                                    boxShadow: '0 0 10px var(--accent-red)'
-                                }}></span>
+                                <Bell size={18} strokeWidth={2.5} />
                             </motion.button>
                         </div>
                     </div>

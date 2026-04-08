@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Send,
     Star,
@@ -16,11 +16,57 @@ export default function FeedbackPage() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [rating, setRating] = useState(0);
+    const [feedbackList, setFeedbackList] = useState<any[]>([]);
+
+    const [form, setForm] = useState({
+        name: '',
+        email: '',
+        wallet: '',
+        feedback: ''
+    });
+
+    useEffect(() => {
+        const saved = localStorage.getItem('invoice_iq_feedback');
+        if (saved) setFeedbackList(JSON.parse(saved));
+    }, []);
+
+    const handleExport = () => {
+        const headers = ["Timestamp", "Full Name", "Email", "Stellar Wallet Address", "Rating (1-5)", "Feedback"];
+        const rows = feedbackList.map(f => [
+            f.timestamp,
+            f.name,
+            f.email,
+            f.wallet,
+            f.rating,
+            f.feedback
+        ]);
+
+        const csvContent = "data:text/csv;charset=utf-8,"
+            + headers.join(",") + "\n"
+            + rows.map(e => e.join(",")).join("\n");
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "USER_FEEDBACK_EXPORT.csv");
+        document.body.appendChild(link);
+        link.click();
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate submission
+
+        const newFeedback = {
+            ...form,
+            rating,
+            timestamp: new Date().toLocaleString()
+        };
+
+        const updatedList = [...feedbackList, newFeedback];
+        setFeedbackList(updatedList);
+        localStorage.setItem('invoice_iq_feedback', JSON.stringify(updatedList));
+
         setTimeout(() => {
             setLoading(false);
             setSubmitted(true);
@@ -72,11 +118,22 @@ export default function FeedbackPage() {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '800px' }}>
-            <header>
-                <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>User Feedback</h1>
-                <p style={{ color: 'var(--text-secondary)' }}>
-                    Help us improve InvoiceIQ. Part of the Stellar Rise-In Challenge requirements.
-                </p>
+            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                    <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>User Feedback</h1>
+                    <p style={{ color: 'var(--text-secondary)' }}>
+                        Help us improve InvoiceIQ. Part of the Stellar Rise-In Challenge requirements.
+                    </p>
+                </div>
+                {feedbackList.length > 0 && (
+                    <button
+                        onClick={handleExport}
+                        className="glass"
+                        style={{ padding: '0.6rem 1.25rem', fontSize: '0.85rem', fontWeight: 700, color: 'var(--primary-color)', display: 'flex', gap: '0.5rem', alignItems: 'center' }}
+                    >
+                        <Tag size={16} /> EXPORT CSV ({feedbackList.length})
+                    </button>
+                )}
             </header>
 
             <motion.form
@@ -91,6 +148,8 @@ export default function FeedbackPage() {
                             className="glass"
                             style={inputStyle}
                             placeholder="e.g. Satoshi Nakamoto"
+                            value={form.name}
+                            onChange={(e) => setForm({ ...form, name: e.target.value })}
                         />
                     </FormGroup>
                     <FormGroup label="Email Address" icon={<MessageSquare size={16} />}>
@@ -100,6 +159,8 @@ export default function FeedbackPage() {
                             className="glass"
                             style={inputStyle}
                             placeholder="e.g. satoshi@stellar.org"
+                            value={form.email}
+                            onChange={(e) => setForm({ ...form, email: e.target.value })}
                         />
                     </FormGroup>
                 </div>
@@ -110,6 +171,8 @@ export default function FeedbackPage() {
                         className="glass"
                         style={inputStyle}
                         placeholder="G..."
+                        value={form.wallet}
+                        onChange={(e) => setForm({ ...form, wallet: e.target.value })}
                     />
                     <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
                         We'll use this to verify you as a testnet participant for the Rise-In challenge.
@@ -148,6 +211,8 @@ export default function FeedbackPage() {
                         className="glass"
                         style={{ ...inputStyle, minHeight: '120px', resize: 'vertical' }}
                         placeholder="e.g. Auto-export to PDF, Tax estimates..."
+                        value={form.feedback}
+                        onChange={(e) => setForm({ ...form, feedback: e.target.value })}
                     />
                 </FormGroup>
 
@@ -194,6 +259,27 @@ export default function FeedbackPage() {
                     )}
                 </button>
             </motion.form>
+
+            {feedbackList.length > 0 && (
+                <section style={{ marginTop: '2rem' }}>
+                    <h3 style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>Recent Activity ({feedbackList.length})</h3>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        {feedbackList.slice().reverse().map((f, i) => (
+                            <div key={i} className="glass" style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                <div>
+                                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700 }}>{f.name}</h4>
+                                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{f.timestamp} • {f.wallet.slice(0, 8)}...</p>
+                                </div>
+                                <div style={{ display: 'flex', gap: '0.2rem' }}>
+                                    {[1, 2, 3, 4, 5].map(s => (
+                                        <Star key={s} size={14} fill={s <= f.rating ? 'var(--accent-color)' : 'transparent'} color={s <= f.rating ? 'var(--accent-color)' : 'var(--text-muted)'} />
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            )}
         </div>
     );
 }
