@@ -15,11 +15,13 @@ InvoiceIQ is a client-side, non-custodial Web3 financial dashboard. This documen
 - [x] Wallet disconnect clears session state
 
 ### Smart Contract / Transaction Security
+- [x] Automated CI/CD (GitHub Actions) for build-time security linting
 - [x] All transactions built with official Stellar SDK
 - [x] Fee Bump (gasless) implementation for sponsor-paid fees
+- [x] Persistent Soroban contract storing invoice state (Status, Description, Amounts)
 - [x] Memo field used for invoice traceability
 - [x] Transaction amounts validated client-side before submission
-- [x] No custom Soroban contracts with unaudited business logic
+- [x] Event-driven indexing for audit trails
 
 ### Data Security & Privacy
 - [x] No PII stored on-chain (only Stellar public keys)

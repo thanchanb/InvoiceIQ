@@ -18,14 +18,14 @@
 |----------|------|
 | **🌐 Website Link (Live Demo)** | [https://invoice-iq-dashboard.vercel.app](https://invoice-iq-dashboard.vercel.app) |
 | **📜 Smart Contract** | `CCQK2D2H7N2R475L6Y5YMM6YJ3X4N3XZXYIWC5V3BGHQHQYKQQQQQQQQ` |
-| **📊 Metrics Dashboard** | [/dashboard/metrics](https://invoice-iq-dashboard.vercel.app/dashboard/metrics) |
+| **� CI/CD Pipeline** | [.github/workflows/deploy.yml](./.github/workflows/deploy.yml) |
+| **�📊 Metrics Dashboard** | [/dashboard/metrics](https://invoice-iq-dashboard.vercel.app/dashboard/metrics) |
 | **🔒 Security Checklist** | [/dashboard/security](https://invoice-iq-dashboard.vercel.app/dashboard/security) |
 | **📡 Monitoring Dashboard** | [/dashboard/monitoring](https://invoice-iq-dashboard.vercel.app/dashboard/monitoring) |
 | **⚡ Gasless Transactions** | [/dashboard/gasless](https://invoice-iq-dashboard.vercel.app/dashboard/gasless) |
 | **👥 User Registry (38 wallets)** | [USERS.md](./USERS.md) |
 | **🛡 Security Policy** | [SECURITY.md](./SECURITY.md) |
 | **🏗 Architecture** | [ARCHITECTURE.md](./ARCHITECTURE.md) |
-| **💬 Community Post** | [Twitter/X Announcement](https://twitter.com/intent/tweet?text=InvoiceIQ%20is%20live%20on%20Stellar%20Testnet!%20%F0%9F%9A%80%20Smart%20invoicing%20for%20freelancers%20%23Stellar%20%23Web3) |
 
 ---
 
@@ -142,8 +142,10 @@ Full checklist at: [/dashboard/security](https://invoice-iq-dashboard.vercel.app
 **Score: 94% — 15 passed, 2 warnings, 0 critical failures**
 
 Key items:
+- ✅ Automated CI/CD (GitHub Actions) for build/lint/test
 - ✅ Non-custodial Freighter auth (no private keys stored)
 - ✅ Fee Bump transactions implemented (gasless)
+- ✅ Persistent Soroban contract for on-chain invoice storage
 - ✅ HTTPS enforced (TLS 1.3 via Vercel)
 - ✅ Security headers in `vercel.json` (X-Frame-Options, CSP)
 - ✅ 0 high-severity CVEs (`npm audit`)

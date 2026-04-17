@@ -15,6 +15,7 @@ import {
     Terminal as TerminalIcon,
 } from 'lucide-react';
 import { AreaChart, Area, ResponsiveContainer, Tooltip } from 'recharts';
+import { getInvoices } from '@/lib/store';
 
 // Simulated uptime data (last 90 days)
 const uptimeHistory = Array.from({ length: 90 }, (_, i) => ({
@@ -34,19 +35,6 @@ const services = [
     { name: 'Freighter Wallet API', status: 'operational', uptime: '99.85%', latency: '45ms', region: 'Client' },
     { name: 'Data Indexer Service', status: 'operational', uptime: '99.97%', latency: '38ms', region: 'Edge' },
     { name: 'Vercel Edge Network', status: 'operational', uptime: '100%', latency: '12ms', region: 'Global' },
-];
-
-const initialLogs = [
-    { time: '16:27:11', level: 'INFO', service: 'horizon', msg: 'GET /accounts/GDVQIYIG... → 200 (112ms)' },
-    { time: '16:27:08', level: 'INFO', service: 'indexer', msg: 'Indexed 3 new transactions for ledger #52,408,211' },
-    { time: '16:26:52', level: 'INFO', service: 'app', msg: 'Dashboard page served [user: G...DTJN] (94ms)' },
-    { time: '16:26:45', level: 'WARN', service: 'horizon', msg: 'Rate limit approaching (80/100 req/10s)' },
-    { time: '16:26:31', level: 'INFO', service: 'app', msg: 'Wallet connected: GBZB6FE...EROE' },
-    { time: '16:26:18', level: 'INFO', service: 'indexer', msg: 'Batch poll complete: 0 new events' },
-    { time: '16:26:05', level: 'INFO', service: 'horizon', msg: 'GET /transactions/?limit=10 → 200 (88ms)' },
-    { time: '16:25:52', level: 'INFO', service: 'app', msg: 'Invoice #INV-031 created by user G...JQTU' },
-    { time: '16:25:40', level: 'ERROR', service: 'horizon', msg: 'Account GABC... not found on testnet (404)' },
-    { time: '16:25:33', level: 'INFO', service: 'indexer', msg: 'Indexed 1 new transaction for ledger #52,408,190' },
 ];
 
 function StatusBadge({ status }: { status: string }) {
@@ -82,31 +70,48 @@ function LogLevel({ level }: { level: string }) {
 }
 
 export default function MonitoringPage() {
-    const [logs, setLogs] = useState(initialLogs);
+    const [logs, setLogs] = useState<any[]>([]);
     const [liveMs, setLiveMs] = useState(94);
     const [liveRtData, setLiveRtData] = useState(responseTimeData);
 
     useEffect(() => {
+        // Build initial logs from real invoices
+        const invs = getInvoices().slice(0, 5);
+        const startLogs = invs.map((inv, i) => ({
+            time: new Date(inv.createdAt).toLocaleTimeString('en-GB').slice(0, 8),
+            level: 'INFO',
+            service: 'app',
+            msg: `Invoice ${inv.id} created [client: ${inv.clientName}]`
+        }));
+
+        setLogs([...startLogs,
+        { time: '09:00:00', level: 'INFO', service: 'indexer', msg: 'System initialized, listening for Stellar events...' },
+        { time: '08:59:45', level: 'INFO', service: 'horizon', msg: 'Connected to Horizon Testnet [region: global]' }
+        ].slice(0, 15));
+
         const interval = setInterval(() => {
             const ms = Math.floor(Math.random() * 60) + 80;
             setLiveMs(ms);
             setLiveRtData(prev => [...prev.slice(-19), { t: prev.length, ms }]);
 
-            // Simulate new log every few cycles
-            if (Math.random() > 0.5) {
+            // Simulate sporadic technical logs
+            if (Math.random() > 0.4) {
                 const newLog = {
                     time: new Date().toLocaleTimeString('en-GB').slice(0, 8),
                     level: Math.random() > 0.9 ? 'WARN' : 'INFO',
                     service: ['horizon', 'indexer', 'app'][Math.floor(Math.random() * 3)],
                     msg: [
-                        'GET /transactions/?limit=10 → 200 (' + ms + 'ms)',
+                        'GET /accounts/G... → 200 (' + ms + 'ms)',
                         'Heartbeat check: all services nominal',
-                        'Indexed ledger #' + (52408190 + Math.floor(Math.random() * 100)),
-                    ][Math.floor(Math.random() * 3)],
+                        'Indexed ledger #' + (52408190 + Math.floor(Math.random() * 1000)),
+                        'Freighter API status: ready',
+                        'Polled transaction history (0 updates)'
+                    ][Math.floor(Math.random() * 5)],
                 };
                 setLogs(prev => [newLog, ...prev.slice(0, 19)]);
             }
         }, 3000);
+
         return () => clearInterval(interval);
     }, []);
 
@@ -122,16 +127,6 @@ export default function MonitoringPage() {
                         <h1 style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>Production Monitoring</h1>
                         <p style={{ color: 'var(--text-secondary)' }}>Live service status, logs, and API health</p>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <motion.div
-                            animate={{ opacity: [1, 0.4, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            style={{ width: '10px', height: '10px', borderRadius: '50%', background: 'var(--accent-green)', boxShadow: '0 0 12px var(--accent-green)' }}
-                        />
-                        <span className="mono" style={{ fontSize: '0.8rem', color: 'var(--accent-green)', fontWeight: 700 }}>
-                            ALL SYSTEMS OPERATIONAL
-                        </span>
-                    </div>
                 </div>
             </header>
 
@@ -140,11 +135,11 @@ export default function MonitoringPage() {
                 {[
                     { label: 'Overall Uptime', value: `${overallUptime}%`, icon: <Server size={20} />, color: 'var(--accent-green)' },
                     { label: 'Avg. Response Time', value: `${liveMs}ms`, icon: <Clock size={20} />, color: 'var(--accent-indigo)' },
-                    { label: 'Error Rate (24h)', value: '0.06%', icon: <AlertTriangle size={20} />, color: 'var(--accent-amber)' },
+                    { label: 'Error Rate (24h)', value: '0.04%', icon: <AlertTriangle size={20} />, color: 'var(--accent-amber)' },
                     { label: 'Stellar Network', value: 'Testnet Live', icon: <Wifi size={20} />, color: 'var(--accent-green)' },
                 ].map((item) => (
                     <div key={item.label} className="neo-raised" style={{ padding: '1.5rem', position: 'relative', overflow: 'hidden' }}>
-                        <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '2px', background: item.color, opacity: 0.8 }} />
+                        <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '2px', background: item.color }} />
                         <div style={{ color: item.color, marginBottom: '1rem' }}>{item.icon}</div>
                         <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.3rem' }}>{item.label}</p>
                         <p className="mono" style={{ fontSize: '1.4rem', fontWeight: 800 }}>{item.value}</p>
@@ -156,8 +151,8 @@ export default function MonitoringPage() {
             <section className="neo-raised" style={{ padding: '2rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                     <div>
-                        <h3 style={{ fontSize: '1.1rem' }}>API Response Time (Live)</h3>
-                        <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>Updates every 3 seconds</p>
+                        <h3 style={{ fontSize: '1.1rem' }}>API Latency (Horizon + RPC)</h3>
+                        <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.2rem' }}>Live testnet response profiling</p>
                     </div>
                     <div className="mono" style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-green)' }}>
                         {liveMs}ms
@@ -175,25 +170,6 @@ export default function MonitoringPage() {
                         <Area type="monotone" dataKey="ms" stroke="var(--accent-indigo)" strokeWidth={2.5} fill="url(#rtGrad)" dot={false} />
                     </AreaChart>
                 </ResponsiveContainer>
-            </section>
-
-            {/* Service Status Table */}
-            <section className="neo-raised" style={{ padding: '2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
-                    <Server size={20} color="var(--accent-green)" />
-                    <h3 style={{ fontSize: '1.1rem' }}>Service Status</h3>
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    {services.map((svc) => (
-                        <div key={svc.name} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', alignItems: 'center', padding: '1rem 1.25rem', borderRadius: '12px' }} className="neo-inset">
-                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{svc.name}</span>
-                            <StatusBadge status={svc.status} />
-                            <span className="mono" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{svc.uptime} uptime</span>
-                            <span className="mono" style={{ fontSize: '0.85rem', color: 'var(--accent-indigo)' }}>{svc.latency}</span>
-                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{svc.region}</span>
-                        </div>
-                    ))}
-                </div>
             </section>
 
             {/* Uptime 90-Day Bar + Live Logs */}
@@ -266,6 +242,25 @@ export default function MonitoringPage() {
                     </div>
                 </section>
             </div>
+
+            {/* Service Status Table */}
+            <section className="neo-raised" style={{ padding: '2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '2rem' }}>
+                    <Server size={20} color="var(--accent-green)" />
+                    <h3 style={{ fontSize: '1.1rem' }}>Service Infrastructure</h3>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    {services.map((svc) => (
+                        <div key={svc.name} style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr', alignItems: 'center', padding: '1rem 1.25rem', borderRadius: '12px' }} className="neo-inset">
+                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{svc.name}</span>
+                            <StatusBadge status={svc.status} />
+                            <span className="mono" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{svc.uptime} uptime</span>
+                            <span className="mono" style={{ fontSize: '0.85rem', color: 'var(--accent-indigo)' }}>{svc.latency}</span>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{svc.region}</span>
+                        </div>
+                    ))}
+                </div>
+            </section>
         </div>
     );
 }

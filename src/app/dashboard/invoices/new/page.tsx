@@ -8,10 +8,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
-    saveInvoice, nextInvoiceId, getClients,
+    saveInvoice, nextInvoiceId, getClients, getInvoices,
     type Invoice, type InvoiceItem, type Client
 } from '@/lib/store';
 import { useWallet } from '@/context/WalletContext';
+import { generateInvoicePDF } from '@/lib/pdf';
 
 function generateId(): string {
     return Math.random().toString(36).substr(2, 9);
@@ -126,8 +127,17 @@ export default function NewInvoicePage() {
                     The invoice has been saved. You can view and manage it from the Invoices page.
                 </p>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <Link href="/dashboard/invoices" style={{ padding: '0.75rem 2rem', background: 'var(--accent-green)', color: '#0a0a0a', borderRadius: '12px', fontWeight: 800 }}>
-                        View Invoices
+                    <button
+                        onClick={() => {
+                            const inv = getInvoices().find(i => i.id === savedId);
+                            if (inv) generateInvoicePDF(inv);
+                        }}
+                        style={{ padding: '0.75rem 2rem', background: 'var(--primary-color)', color: 'white', borderRadius: '12px', fontWeight: 800 }}
+                    >
+                        Download PDF
+                    </button>
+                    <Link href="/dashboard/invoices" style={{ padding: '0.75rem 2rem', background: 'rgba(0,255,178,0.1)', color: 'var(--accent-green)', borderRadius: '12px', fontWeight: 800, border: '1px solid rgba(0,255,178,0.2)' }}>
+                        View List
                     </Link>
                     <button onClick={() => { setSubmitted(false); setItems([{ id: generateId(), description: '', rate: 0, quantity: 1 }]); setForm(f => ({ ...f, clientName: '', clientEmail: '', project: '', notes: '' })); }} style={{ padding: '0.75rem 2rem', borderRadius: '12px', fontWeight: 700 }} className="neo-button">
                         Create Another

@@ -259,3 +259,86 @@ export function getDashboardStats(): DashboardStats {
         earningTrend,
     };
 }
+
+// ─── Management ─────────────────────────────────────────────────────────────
+
+export function clearAllData(): void {
+    if (typeof window === 'undefined') return;
+    Object.values(KEYS).forEach(k => localStorage.removeItem(k));
+    window.location.reload();
+}
+
+const DEMO_CLIENTS: Client[] = [
+    { id: 'cli_1', name: 'Global Tech Solutions', email: 'billing@globaltech.com', company: 'Global Tech', createdAt: new Date().toISOString() },
+    { id: 'cli_2', name: 'Creative Minds Studio', email: 'hello@creativeminds.io', company: 'CMS Inc.', createdAt: new Date().toISOString() },
+    { id: 'cli_3', name: 'Stellar Foundation', email: 'grants@stellar.org', stellarWallet: 'G...DDFN', createdAt: new Date().toISOString() },
+];
+
+export function seedDemoData(): void {
+    if (typeof window === 'undefined') return;
+
+    // Seed Clients
+    write(KEYS.clients, DEMO_CLIENTS);
+
+    // Seed Profile
+    write(KEYS.profile, {
+        name: 'Demo User',
+        email: 'demo@invoiceiq.app',
+        businessName: 'Rise-In Labs',
+        currency: 'XLM'
+    });
+
+    // Seed Invoices (Last 6 months)
+    const now = new Date();
+    const demoInvoices: Invoice[] = [];
+
+    // Monthly paid invoices
+    for (let i = 0; i < 6; i++) {
+        const d = new Date(now.getFullYear(), now.getMonth() - i, 15);
+        demoInvoices.push({
+            id: `INV-00${6 - i}`,
+            clientName: DEMO_CLIENTS[i % 3].name,
+            clientEmail: DEMO_CLIENTS[i % 3].email,
+            project: 'Quarterly Maintenance',
+            items: [{ id: '1', description: 'Consulting', rate: 2500 + i * 100, quantity: 1 }],
+            amount: 2500 + i * 100,
+            currency: 'XLM',
+            issuedDate: d.toISOString().split('T')[0],
+            dueDate: new Date(d.getTime() + 30 * 86400000).toISOString().split('T')[0],
+            status: 'paid',
+            createdAt: d.toISOString()
+        });
+    }
+
+    // Add some pending/overdue
+    demoInvoices.push({
+        id: 'INV-007',
+        clientName: 'Stellar Foundation',
+        clientEmail: 'grants@stellar.org',
+        project: 'Smart Contract Audit',
+        items: [{ id: '1', description: 'Audit', rate: 12000, quantity: 1 }],
+        amount: 12000,
+        currency: 'USDC',
+        issuedDate: new Date(now.getTime() - 10 * 86400000).toISOString().split('T')[0],
+        dueDate: new Date(now.getTime() + 20 * 86400000).toISOString().split('T')[0],
+        status: 'pending',
+        createdAt: now.toISOString()
+    });
+
+    demoInvoices.push({
+        id: 'INV-008',
+        clientName: 'Global Tech Solutions',
+        clientEmail: 'billing@globaltech.com',
+        project: 'Frontend Overhaul',
+        items: [{ id: '1', description: 'Development', rate: 8500, quantity: 1 }],
+        amount: 8500,
+        currency: 'XLM',
+        issuedDate: new Date(now.getTime() - 45 * 86400000).toISOString().split('T')[0],
+        dueDate: new Date(now.getTime() - 15 * 86400000).toISOString().split('T')[0],
+        status: 'overdue',
+        createdAt: now.toISOString()
+    });
+
+    write(KEYS.invoices, demoInvoices);
+    window.location.reload();
+}

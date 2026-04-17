@@ -1,15 +1,20 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { User, Bell, Shield, Wallet, Check, Key, Cpu } from 'lucide-react';
+import { User, Bell, Shield, Wallet, Check, Key, Cpu, Database, Trash2, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { getProfile, saveProfile, getSettings, saveSettings, type UserProfile, type AppSettings } from '@/lib/store';
+import {
+    getProfile, saveProfile, getSettings, saveSettings,
+    seedDemoData, clearAllData,
+    type UserProfile, type AppSettings
+} from '@/lib/store';
 import { useWallet } from '@/context/WalletContext';
 
 const TABS = [
     { id: 'identity', icon: <User size={18} />, label: 'Identity' },
     { id: 'vault', icon: <Wallet size={18} />, label: 'Vault' },
     { id: 'preferences', icon: <Cpu size={18} />, label: 'Preferences' },
+    { id: 'management', icon: <Database size={18} />, label: 'Management' },
 ];
 
 export default function SettingsPage() {
@@ -36,6 +41,18 @@ export default function SettingsPage() {
         saveSettings(settings);
         setSaved(true);
         setTimeout(() => setSaved(false), 3000);
+    };
+
+    const handleSeed = () => {
+        if (confirm('This will populate your dashboard with demo invoices and clients. Continue?')) {
+            seedDemoData();
+        }
+    };
+
+    const handleClear = () => {
+        if (confirm('DANGER: This will delete ALL your invoices, clients, and settings forever. Continue?')) {
+            clearAllData();
+        }
     };
 
     return (
@@ -72,7 +89,7 @@ export default function SettingsPage() {
                     {tab === 'identity' && (
                         <section className="neo-raised" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '0.5rem' }}>
-                                <div className="neo-raised" style={{ width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-green)' }}>
+                                <div className="neo-raised" style={{ width: '64px', height: '64px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', fontWeight: 800, color: 'var(--accent-green)', position: 'relative' }}>
                                     {profile.name ? profile.name.charAt(0).toUpperCase() : '?'}
                                     <div style={{ position: 'absolute', bottom: '4px', right: '4px', width: '10px', height: '10px', background: isConnected ? 'var(--accent-green)' : 'var(--text-muted)', borderRadius: '50%', border: '2px solid var(--surface-color)' }} />
                                 </div>
@@ -152,21 +169,49 @@ export default function SettingsPage() {
                         </section>
                     )}
 
+                    {tab === 'management' && (
+                        <section className="neo-raised" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                            <h3 style={{ fontSize: '1.1rem' }}>Storage Management</h3>
+
+                            <div style={{ padding: '1.5rem', borderRadius: '14px', background: 'rgba(99,102,241,0.05)', border: '1px solid rgba(99,102,241,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <div>
+                                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.2rem' }}>Seed Demo Data</h4>
+                                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Fills the dashboard with mock invoices and clients for testing charts.</p>
+                                </div>
+                                <button onClick={handleSeed} style={{ padding: '0.7rem 1.25rem', borderRadius: '10px', background: 'var(--primary-color)', color: 'white', fontWeight: 700, fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <RefreshCw size={16} /> Seed Data
+                                </button>
+                            </div>
+
+                            <div style={{ padding: '1.5rem', borderRadius: '14px', background: 'rgba(239,68,68,0.05)', border: '1px solid rgba(239,68,68,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                <div>
+                                    <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.2rem', color: 'var(--accent-red)' }}>Clear All Records</h4>
+                                    <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Wipes all localStorage data. Use this to start fresh.</p>
+                                </div>
+                                <button onClick={handleClear} style={{ padding: '0.7rem 1.25rem', borderRadius: '10px', background: 'rgba(239,68,68,0.1)', color: 'var(--accent-red)', fontWeight: 700, fontSize: '0.85rem', border: '1px solid rgba(239,68,68,0.2)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <Trash2 size={16} /> Purge Storage
+                                </button>
+                            </div>
+                        </section>
+                    )}
+
                     {/* Save Button */}
-                    <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
-                        <button className="neo-button" style={{ padding: '0.8rem 1.75rem' }} onClick={() => { setProfile(getProfile()); setSettings(getSettings()); }}>
-                            Reset
-                        </button>
-                        <motion.button
-                            whileHover={{ scale: 1.03 }}
-                            whileTap={{ scale: 0.97 }}
-                            onClick={handleSave}
-                            style={{ padding: '0.85rem 2rem', background: saved ? 'var(--accent-green)' : 'var(--primary-color)', color: saved ? '#0a0a0a' : 'white', fontWeight: 800, borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.6rem', boxShadow: '0 8px 20px -4px rgba(99,102,241,0.3)', transition: 'background 0.3s' }}
-                        >
-                            <Check size={18} />
-                            {saved ? 'Saved!' : 'Save Settings'}
-                        </motion.button>
-                    </div>
+                    {tab !== 'management' && (
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
+                            <button className="neo-button" style={{ padding: '0.8rem 1.75rem' }} onClick={() => { setProfile(getProfile()); setSettings(getSettings()); }}>
+                                Reset
+                            </button>
+                            <motion.button
+                                whileHover={{ scale: 1.03 }}
+                                whileTap={{ scale: 0.97 }}
+                                onClick={handleSave}
+                                style={{ padding: '0.85rem 2rem', background: saved ? 'var(--accent-green)' : 'var(--primary-color)', color: saved ? '#0a0a0a' : 'white', fontWeight: 800, borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.6rem', boxShadow: '0 8px 20px -4px rgba(99,102,241,0.3)', transition: 'background 0.3s' }}
+                            >
+                                <Check size={18} />
+                                {saved ? 'Saved!' : 'Save Settings'}
+                            </motion.button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
@@ -174,7 +219,7 @@ export default function SettingsPage() {
 }
 
 function Field({ label, value, onChange, placeholder = '', type = 'text', mono = false, children }: {
-    label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string; mono?: boolean; children?: React.ReactNode;
+    label: string; value?: string; onChange?: (v: string) => void; placeholder?: string; type?: string; mono?: boolean; children?: React.ReactNode;
 }) {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -183,7 +228,7 @@ function Field({ label, value, onChange, placeholder = '', type = 'text', mono =
                 <input
                     type={type}
                     value={value}
-                    onChange={e => onChange(e.target.value)}
+                    onChange={e => onChange?.(e.target.value)}
                     placeholder={placeholder}
                     style={{ ...inputSt, fontFamily: mono ? 'JetBrains Mono, monospace' : undefined }}
                 />

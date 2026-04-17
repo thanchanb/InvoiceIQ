@@ -12,6 +12,7 @@ import {
     getInvoices, deleteInvoice, updateInvoiceStatus,
     type Invoice, type InvoiceStatus
 } from '@/lib/store';
+import { generateInvoicePDF } from '@/lib/pdf';
 
 const STATUS_TAB = ['all', 'paid', 'pending', 'overdue', 'draft'] as const;
 
@@ -247,6 +248,13 @@ export default function InvoicesPage() {
                                                             <CheckCircle2 size={13} /> PAID
                                                         </button>
                                                     )}
+                                                    <button
+                                                        title="Download PDF"
+                                                        onClick={() => generateInvoicePDF(inv)}
+                                                        style={{ color: 'var(--text-muted)' }}
+                                                    >
+                                                        <Download size={17} />
+                                                    </button>
                                                     <button title="Delete" onClick={() => handleDelete(inv.id)} style={{ color: 'var(--text-muted)' }}>
                                                         <Trash2 size={17} />
                                                     </button>
