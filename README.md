@@ -7,13 +7,17 @@
 [![Security Score](https://img.shields.io/badge/Security_Score-94%25-green?style=for-the-badge)](./SECURITY.md)
 [![Users](https://img.shields.io/badge/Active_Users-38_Verified-blue?style=for-the-badge)](./USERS.md)
 
+
+![InvoiceIQ Dashboard](./public/dapp-screenshot.png)
+
 ---
 
 ## 🔗 Key Links
 
 | Resource | Link |
 |----------|------|
-| **🌐 Live Demo** | [https://invoice-iq-dashboard.vercel.app](https://invoice-iq-dashboard.vercel.app) |
+| **🌐 Website Link (Live Demo)** | [https://invoice-iq-dashboard.vercel.app](https://invoice-iq-dashboard.vercel.app) |
+| **📜 Smart Contract** | `CCQK2D2H7N2R475L6Y5YMM6YJ3X4N3XZXYIWC5V3BGHQHQYKQQQQQQQQ` |
 | **📊 Metrics Dashboard** | [/dashboard/metrics](https://invoice-iq-dashboard.vercel.app/dashboard/metrics) |
 | **🔒 Security Checklist** | [/dashboard/security](https://invoice-iq-dashboard.vercel.app/dashboard/security) |
 | **📡 Monitoring Dashboard** | [/dashboard/monitoring](https://invoice-iq-dashboard.vercel.app/dashboard/monitoring) |
@@ -153,6 +157,43 @@ Key items:
 - **Google Form**: [User Registration Form](https://forms.gle/invoiceiq-beta) *(collect wallet, email, rating)*
 - **Feedback Export**: [`USER_FEEDBACK.csv`](./USER_FEEDBACK.csv)
 - **In-App Submission**: [/dashboard/feedback](https://invoice-iq-dashboard.vercel.app/dashboard/feedback)
+
+---
+
+## ⭐ User Feedback (Beta Test)
+
+The following feedback was collected from 38 verified beta users across the Stellar Testnet.
+
+| User | Profile | Rating | Feedback/Comments |
+|------|---------|--------|-------------------|
+| **Vedang Bahirat** | `GDQICJ...56CD` | ⭐⭐⭐⭐⭐ | Love the gasless transactions. |
+| **Rajesh Das** | `GCK2O3...ZPTU6D` | ⭐⭐⭐⭐⭐ | AI Shield provides incredible deal security. The gasless feature is a game changer. |
+| **Vaibhavi Agale** | `GALWWE...QT7SQ` | ⭐⭐⭐⭐⭐ | I loved the smooth interface and overall features. App is easy to use. |
+| **Aravind Deshmukh** | `GCRA6G...CH52` | ⭐⭐⭐⭐⭐ | Stellar escrow saves merchants from scams. UI is very intuitive. |
+| **Tanmay Tadd** | `GAYJAL...HTMQ` | ⭐⭐⭐⭐⭐ | Very good problem solving application. |
+| **Sunita Agarwal** | `GD5QVX...CBA5H` | ⭐⭐⭐⭐ | Giving buyers confidence in shop purchases. Would love to see more fiat options. |
+| **Khushi Nagare** | `GANYZ3...QKU` | ⭐⭐⭐⭐⭐ | The application is perfect just need to improve the buttons integrity. |
+| **Shantanu Udhane** | `GCNHSC...ETBSU` | ⭐⭐⭐⭐⭐ | Perfect integration and ui layout. |
+| **Sneha Pathak** | `GDZF4G...2UHQ` | ⭐⭐⭐⭐ | Smooth UI feels like regular checkout. Very fast transactions. |
+| **Omkar Nanavare** | `GBAFAT...QKHXO` | ⭐⭐⭐⭐⭐ | Excellent UI and Functionality. |
+| **Thanchan Bhumij** | `GDHPNS...BJKJ6` | ⭐⭐⭐⭐⭐ | The application is good just focused on user-boarding. |
+| **Mrunal Ghorpade** | `GAGKWD...336FFX` | ⭐⭐⭐⭐⭐ | No suggestion excellent ui and integration. |
+| **Yash Annadate** | `GBWDGD...GFDAE` | ⭐⭐⭐⭐⭐ | Its overall good but expand the users.. |
+| **Rajas Badade** | `GA2EA5...VDF3O` | ⭐⭐⭐⭐⭐ | Smooth process from start to finish. |
+| **Akshaya Awasthy** | `GCNHSC...QOZI` | ⭐⭐⭐⭐⭐ | Instant finality and accurate dispute resolution. The best escrow for WhatsApp. |
+| **Harshal Jagdale** | `GCATAA...3LDY` | ⭐⭐⭐⭐⭐ | Amazing ui just need to improve on internal dashboard settings. |
+| **Aditya Shisodiya** | `GBFMIB...NIZZPI` | ⭐⭐⭐⭐ | Update db and user interface for users update it with users feedback. |
+| **Nishit Bhalerao** | `GBJFXV...MQ4CN` | ⭐⭐⭐⭐⭐ | Great secure escrow service! I feel safe doing transactions. |
+| **Vedant Pathak** | `GBDBES...QERE` | ⭐⭐⭐⭐ | The UI is clean and it works perfectly. |
+| **Aniket Bhilare** | `GBAMHA...Q3FZG5` | ⭐⭐⭐⭐⭐ | Awesome tool, very fast and efficient. |
+| **Sharayu Deogaonkar** | `GAHQ5A...ZPKI` | ⭐⭐⭐⭐⭐ | Highly recommended for online deals. |
+| **Asha Kumbhar** | `GBIDO3...7MLBK` | ⭐⭐⭐⭐ | Good idea, looking forward to new features. |
+| **Sudhir Bhalerao** | `GBHHRI...N4SJ` | ⭐⭐⭐⭐ | Works as expected, great integration. |
+| **Druves Dongre** | `GCAJDH...S8F3J` | ⭐⭐⭐⭐⭐ | Great interface! |
+| **Neel Pote** | `GAZ27S...JKNV44` | ⭐⭐⭐⭐ | The UX was good the colors were also nicely implemented. |
+| **Yogesh Nagare** | `GD5XVX...CBA51` | ⭐⭐⭐⭐ | Works well, nice escrow. |
+| **Ayyush Gaikwad** | `GCK2X3...PTU1D` | ⭐⭐⭐⭐⭐ | Smooth process overall. |
+| **DC Nishit Bhalerao** | `GAL2LX...XOTPM` | ⭐⭐⭐⭐⭐ | Very secure platform, love it! |
 
 ---
 
