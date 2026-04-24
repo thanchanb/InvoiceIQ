@@ -10,13 +10,13 @@ import {
     CheckCircle2,
     AlertCircle
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function FeedbackPage() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [rating, setRating] = useState(0);
-    const [feedbackList, setFeedbackList] = useState<any[]>([]);
+    const [feedbackList, setFeedbackList] = useState<Array<{ name: string; email: string; wallet: string; rating: number; feedback: string; timestamp: string }>>([]);
 
     const [form, setForm] = useState({
         name: '',
@@ -175,7 +175,7 @@ export default function FeedbackPage() {
                         onChange={(e) => setForm({ ...form, wallet: e.target.value })}
                     />
                     <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
-                        We'll use this to verify you as a testnet participant for the Rise-In challenge.
+                        We&apos;ll use this to verify you as a testnet participant for the Rise-In challenge.
                     </p>
                 </FormGroup>
 
@@ -284,7 +284,7 @@ export default function FeedbackPage() {
     );
 }
 
-function FormGroup({ label, children, icon }: any) {
+function FormGroup({ label, children, icon }: { label: string; children: React.ReactNode; icon?: React.ReactNode }) {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <label style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

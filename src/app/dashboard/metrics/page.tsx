@@ -3,17 +3,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import {
-    AreaChart, Area, LineChart, Line, BarChart, Bar,
+    AreaChart, Area,
     XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
     PieChart, Pie, Cell,
 } from 'recharts';
 import {
-    Users, Activity, TrendingUp, Repeat, Zap, Clock, Globe,
-    Database, ArrowUpRight, RefreshCw, FileText
+    Users, Activity, TrendingUp, Zap, Globe,
+    ArrowUpRight, RefreshCw, FileText
 } from 'lucide-react';
-import { getDashboardStats, getInvoices, getClients, type DashboardStats } from '@/lib/store';
+import { getDashboardStats, getClients, type DashboardStats } from '@/lib/store';
 
-function StatCard({ title, value, sub, icon, trend, color = 'var(--accent-green)' }: any) {
+function StatCard({ title, value, sub, icon, trend, color = 'var(--accent-green)' }: { title: string; value: string; sub?: string | null; icon: React.ReactNode; trend?: string | null; color?: string; }) {
     return (
         <div className="neo-raised" style={{ padding: '1.75rem', position: 'relative', overflow: 'hidden' }}>
             <div style={{ position: 'absolute', top: 0, left: '15%', right: '15%', height: '2px', background: color, opacity: 0.8 }} />
@@ -234,7 +234,7 @@ export default function MetricsDashboard() {
     );
 }
 
-function MetricBar({ label, value, color }: any) {
+function MetricBar({ label, value, color }: { label: string; value: number; color: string }) {
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.5rem' }}>

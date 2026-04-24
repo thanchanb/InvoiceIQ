@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-    Users, Search, Plus, MoreVertical, Mail, ExternalLink,
+    Users, Search, Plus, Mail, ExternalLink,
     DollarSign, Trash2, Edit2, X, Check, Wallet
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -268,7 +268,7 @@ export default function ClientsPage() {
                                     <input
                                         type={type}
                                         placeholder={placeholder}
-                                        value={(form as any)[key]}
+                                        value={form[key as keyof EditableClient] as string}
                                         onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
                                         style={{ padding: '0.75rem 1rem', borderRadius: '10px', border: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.03)', color: 'var(--text-primary)', fontSize: '0.9rem', fontFamily: key === 'stellarWallet' ? 'JetBrains Mono, monospace' : undefined }}
                                     />

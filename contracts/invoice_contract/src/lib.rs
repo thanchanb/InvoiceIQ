@@ -1,76 +1,167 @@
 #![no_std]
 mod test;
-use soroban_sdk::{contract, contractimpl, contracttype, symbol_short, Address, Env, Symbol, Vec, Map, String};
+
+use soroban_sdk::{
+    contract, contractimpl, contracttype, symbol_short, token, Address, Env, String, Symbol,
+};
 
 #[contracttype]
-#[derive(Clone)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub enum DataKey {
-    Invoice(String), // Track invoice by unique ID (String)
-    TotalVolume,     // Track total volume of payments handled
+    Admin,
+    Invoice(String),
+    InvoiceCount,
 }
 
 #[contracttype]
-#[derive(Clone)]
+#[derive(Clone, Debug, Eq, PartialEq)]
 pub struct InvoiceData {
+    pub vendor: Address,
     pub client: Address,
-    pub amount: u32,
+    pub amount: i128,
+    pub token: Address, // The token address used for payment (e.g. XLM or USDC)
     pub description: String,
-    pub status: Symbol, // e.g., "created", "paid", "cancelled"
+    pub status: Symbol, // pending, paid, cancelled
+    pub due_date: u64,
+    pub created_at: u64,
 }
 
 #[contract]
-pub struct InvoiceContract;
+pub struct InvoiceIQContract;
 
 #[contractimpl]
-impl InvoiceContract {
-    /// Creates a new persistent invoice entry in the ledger
-    pub fn create_invoice(env: Env, id: String, client: Address, amount: u32, description: String) {
-        // Ensure the invoice doesn't already exist to prevent overwrites
+impl InvoiceIQContract {
+    /// Initializes the contract with an admin address
+    pub fn init(env: Env, admin: Address) {
+        if env.storage().instance().has(&DataKey::Admin) {
+            panic!("Contract already initialized");
+        }
+        env.storage().instance().set(&DataKey::Admin, &admin);
+    }
+
+    /// Creates a new invoice. Only callable by the vendor.
+    #[allow(clippy::too_many_arguments)]
+    pub fn create_invoice(
+        env: Env,
+        id: String,
+        vendor: Address,
+        client: Address,
+        token_addr: Address,
+        amount: i128,
+        description: String,
+        due_date: u64,
+    ) {
+        vendor.require_auth();
+
+        if amount <= 0 {
+            panic!("Amount must be positive");
+        }
+
         let key = DataKey::Invoice(id.clone());
         if env.storage().persistent().has(&key) {
             panic!("Invoice ID already exists");
         }
 
-        let data = InvoiceData {
-            client,
+        let invoice = InvoiceData {
+            vendor: vendor.clone(),
+            client: client.clone(),
+            token: token_addr,
             amount,
             description,
-            status: symbol_short!("created"),
+            status: symbol_short!("pending"),
+            due_date,
+            created_at: env.ledger().timestamp(),
         };
 
-        // Store the invoice data persistently
-        env.storage().persistent().set(&key, &data);
+        env.storage().persistent().set(&key, &invoice);
 
-        // Update total volume placeholder logic
-        let volume_key = DataKey::TotalVolume;
-        let mut total: u32 = env.storage().persistent().get(&volume_key).unwrap_or(0);
-        total += amount;
-        env.storage().persistent().set(&volume_key, &total);
+        // Increment invoice count
+        let count_key = DataKey::InvoiceCount;
+        let count: u32 = env.storage().instance().get(&count_key).unwrap_or(0);
+        env.storage().instance().set(&count_key, &(count + 1));
 
-        // Publish an event for indexing
-        env.events().publish((symbol_short!("inv_new"), id), (amount, data.status));
+        // Publish event
+        env.events().publish(
+            (symbol_short!("invoice"), symbol_short!("created"), id),
+            (vendor, client, amount),
+        );
     }
 
-    /// Marks an invoice as paid
-    pub fn mark_paid(env: Env, id: String) {
+    /// Payments for an invoice. Transfers tokens from client to vendor using Soroban Token interface.
+    pub fn pay_invoice(env: Env, id: String, payer: Address) {
+        payer.require_auth();
+
         let key = DataKey::Invoice(id.clone());
-        let mut data: InvoiceData = env.storage().persistent().get(&key).expect("Invoice not found");
-        
-        data.status = symbol_short!("paid");
-        env.storage().persistent().set(&key, &data);
+        let mut invoice: InvoiceData = env
+            .storage()
+            .persistent()
+            .get(&key)
+            .expect("Invoice not found");
 
-        env.events().publish((symbol_short!("inv_paid"), id), data.amount);
+        if invoice.status != symbol_short!("pending") {
+            panic!("Invoice is not in pending status");
+        }
+
+        if payer != invoice.client {
+            panic!("Only the client can pay this invoice");
+        }
+
+        // Perform the token transfer
+        let token_client = token::Client::new(&env, &invoice.token);
+        token_client.transfer(&payer, &invoice.vendor, &invoice.amount);
+
+        // Update status
+        invoice.status = symbol_short!("paid");
+        env.storage().persistent().set(&key, &invoice);
+
+        // Publish event
+        env.events()
+            .publish((symbol_short!("invoice"), symbol_short!("paid"), id), payer);
     }
 
-    /// Retrieves invoice details
+    /// Cancels an invoice. Only the vendor can cancel.
+    pub fn cancel_invoice(env: Env, id: String) {
+        let key = DataKey::Invoice(id.clone());
+        let mut invoice: InvoiceData = env
+            .storage()
+            .persistent()
+            .get(&key)
+            .expect("Invoice not found");
+
+        // Require auth from vendor
+        invoice.vendor.require_auth();
+
+        if invoice.status != symbol_short!("pending") {
+            panic!("Cannot cancel a non-pending invoice");
+        }
+
+        invoice.status = symbol_short!("canceled");
+        env.storage().persistent().set(&key, &invoice);
+
+        env.events().publish(
+            (symbol_short!("invoice"), symbol_short!("canceled"), id),
+            (),
+        );
+    }
+
+    /// Fetches invoice details
     pub fn get_invoice(env: Env, id: String) -> Option<InvoiceData> {
-        let key = DataKey::Invoice(id);
-        env.storage().persistent().get(&key)
+        env.storage().persistent().get(&DataKey::Invoice(id))
     }
 
-    /// Returns the total volume handled by the contract
-    pub fn get_total_volume(env: Env) -> u32 {
-        env.storage().persistent().get(&DataKey::TotalVolume).unwrap_or(0)
+    /// Returns the total number of invoices created
+    pub fn get_total_count(env: Env) -> u32 {
+        env.storage()
+            .instance()
+            .get(&DataKey::InvoiceCount)
+            .unwrap_or(0)
+    }
+
+    /// Returns the admin address
+    pub fn get_admin(env: Env) -> Address {
+        env.storage()
+            .instance()
+            .get(&DataKey::Admin)
+            .expect("Not initialized")
     }
 }
-

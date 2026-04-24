@@ -61,13 +61,13 @@ export async function indexAccountTransactions(
             .order('desc')
             .call();
 
-        const indexed: IndexedTransaction[] = txPage.records.map((tx: any) => {
+        const indexed: IndexedTransaction[] = txPage.records.map((tx) => {
             const entry: IndexedTransaction = {
                 hash: tx.hash,
                 ledger: tx.ledger_attr,
                 createdAt: tx.created_at,
                 sourceAccount: tx.source_account,
-                fee: (parseInt(tx.fee_charged) / 1e7).toFixed(7) + ' XLM',
+                fee: (parseInt(String(tx.fee_charged)) / 1e7).toFixed(7) + ' XLM',
                 memo: tx.memo ?? undefined,
                 operations: [],
                 successful: tx.successful,

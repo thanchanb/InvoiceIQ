@@ -23,6 +23,7 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         // Auto-connect if already authorized in previous session
         const stored = localStorage.getItem('stellar_address');
+         
         if (stored) setAddress(stored);
     }, []);
 

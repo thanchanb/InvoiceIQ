@@ -17,9 +17,9 @@
 | Resource | Link |
 |----------|------|
 | **🌐 Website Link (Live Demo)** | [https://invoice-iq-dashboard.vercel.app](https://invoice-iq-dashboard.vercel.app) |
-| **📜 Smart Contract** | `CCQK2D2H7N2R475L6Y5YMM6YJ3X4N3XZXYIWC5V3BGHQHQYKQQQQQQQQ` |
-| **� CI/CD Pipeline** | [.github/workflows/deploy.yml](./.github/workflows/deploy.yml) |
-| **�📊 Metrics Dashboard** | [/dashboard/metrics](https://invoice-iq-dashboard.vercel.app/dashboard/metrics) |
+| **📜 Smart Contract** | `CCQK2D2H7N2R475L6Y5YMM6YJ3X4N3XZXYIWC5V3BGHQHQYKQQQQQQQQ` (Upgraded v2) |
+| **🚀 CI/CD Pipeline** | [Advanced Workflow (.github/workflows/deploy.yml)](./.github/workflows/deploy.yml) |
+| **📊 Metrics Dashboard** | [/dashboard/metrics](https://invoice-iq-dashboard.vercel.app/dashboard/metrics) |
 | **🔒 Security Checklist** | [/dashboard/security](https://invoice-iq-dashboard.vercel.app/dashboard/security) |
 | **📡 Monitoring Dashboard** | [/dashboard/monitoring](https://invoice-iq-dashboard.vercel.app/dashboard/monitoring) |
 | **⚡ Gasless Transactions** | [/dashboard/gasless](https://invoice-iq-dashboard.vercel.app/dashboard/gasless) |
@@ -31,8 +31,10 @@
 
 ## 💎 Features
 
+- **Advanced Smart Contract**: Robust Soroban-based invoicing with automated token payments, role-based access control, and status lifecycle management.
+- **Enhanced CI/CD**: Professional-grade pipeline with automated Rust quality gates (Clippy, Rustfmt) and frontend build verification.
 - **Smart Invoicing**: Create and send pixel-perfect invoices in seconds.
-- **Payment Tracking**: Real-time status for paid, pending, and overdue invoices.
+- **Payment Tracking**: Real-time status for paid, pending, and overdue invoices using on-chain state.
 - **Income Analytics**: Monthly trend visualization, best-paying clients, and peak income identification.
 - **Financial Health Score**: AI-powered insights into your business consistency and risk areas.
 - **Stellar Integration**: Accept payments directly via Stellar Testnet (XLM/USDC).

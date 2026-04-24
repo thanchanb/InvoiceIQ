@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-    Plus, Search, Filter, MoreHorizontal, Download, Mail,
+    Plus, Search, Download,
     Copy, Activity, CheckCircle2, FileText, RefreshCw, Trash2
 } from 'lucide-react';
 import Link from 'next/link';

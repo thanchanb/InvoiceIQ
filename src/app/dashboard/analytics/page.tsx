@@ -4,10 +4,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
     TrendingUp, BarChart2, PieChart as PieIcon, DollarSign, FileText
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+
 import {
     AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell,
-    XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
+    XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
 import Link from 'next/link';
 import { getDashboardStats, getInvoices, type Invoice } from '@/lib/store';

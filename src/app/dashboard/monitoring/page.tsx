@@ -3,15 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    Activity,
     CheckCircle,
     AlertTriangle,
     XCircle,
     Server,
     Wifi,
-    Database,
     Clock,
-    RefreshCw,
     Terminal as TerminalIcon,
 } from 'lucide-react';
 import { AreaChart, Area, ResponsiveContainer, Tooltip } from 'recharts';
@@ -70,14 +67,14 @@ function LogLevel({ level }: { level: string }) {
 }
 
 export default function MonitoringPage() {
-    const [logs, setLogs] = useState<any[]>([]);
+    const [logs, setLogs] = useState<Array<{ time: string; level: string; service: string; msg: string }>>([]);
     const [liveMs, setLiveMs] = useState(94);
     const [liveRtData, setLiveRtData] = useState(responseTimeData);
 
     useEffect(() => {
         // Build initial logs from real invoices
         const invs = getInvoices().slice(0, 5);
-        const startLogs = invs.map((inv, i) => ({
+        const startLogs = invs.map((inv) => ({
             time: new Date(inv.createdAt).toLocaleTimeString('en-GB').slice(0, 8),
             level: 'INFO',
             service: 'app',

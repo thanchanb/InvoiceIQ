@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Zap,
     CheckCircle2,
-    AlertCircle,
     Info,
     ExternalLink,
     Copy,
@@ -216,7 +215,7 @@ export default function GaslessPage() {
                                     <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--text-secondary)' }}>{label}</label>
                                     <input
                                         placeholder={placeholder}
-                                        value={(form as any)[key]}
+                                        value={form[key as keyof typeof form]}
                                         onChange={(e) => setForm({ ...form, [key]: e.target.value })}
                                         required={key !== 'memo'}
                                         style={{ padding: '0.75rem 1rem', borderRadius: '10px', fontSize: '0.9rem' }}

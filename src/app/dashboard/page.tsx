@@ -32,17 +32,10 @@ import { useWallet } from '@/context/WalletContext';
 import { getAccountBalance, fetchTransactionHistory } from '@/lib/stellar';
 import { getDashboardStats, type DashboardStats } from '@/lib/store';
 
-const STATUS_COLOR: Record<string, string> = {
-    paid: 'var(--accent-green)',
-    pending: 'var(--accent-amber)',
-    overdue: 'var(--accent-red)',
-    draft: 'var(--text-muted)',
-};
-
 export default function DashboardOverview() {
     const { address, isConnected } = useWallet();
     const [balance, setBalance] = useState('0.00');
-    const [transactions, setTransactions] = useState<any[]>([]);
+    const [transactions, setTransactions] = useState<Array<{ id: string; hash: string; ledger_attr: number; created_at: string; fee_charged: string | number }>>([]);
     const [loading, setLoading] = useState(false);
     const [stats, setStats] = useState<DashboardStats | null>(null);
 
@@ -61,6 +54,7 @@ export default function DashboardOverview() {
     // Load Stellar on-chain data when wallet connected
     useEffect(() => {
         if (!isConnected || !address) return;
+
         setLoading(true);
         Promise.all([getAccountBalance(address), fetchTransactionHistory(address)])
             .then(([bal, txs]) => { setBalance(bal); setTransactions(txs); })
@@ -299,7 +293,7 @@ export default function DashboardOverview() {
                             </tr>
                         </thead>
                         <tbody>
-                            {transactions.map((tx: any) => (
+                            {transactions.map((tx) => (
                                 <tr key={tx.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
                                     <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--accent-green)' }}>{tx.hash.slice(0, 8)}...</td>
                                     <td className="mono" style={{ padding: '1.5rem 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>#{tx.ledger_attr}</td>
@@ -354,7 +348,9 @@ export default function DashboardOverview() {
     );
 }
 
-function HeroCard({ title, value, trend, isPositive, icon, isPulsing = false, isLive = false }: any) {
+function HeroCard({ title, value, trend, isPositive, icon, isPulsing = false, isLive = false }: {
+    title: string; value: string; trend?: string | null; isPositive: boolean | null; icon: React.ReactNode; isPulsing?: boolean; isLive?: boolean;
+}) {
     return (
         <div className={`neo-raised ${isPulsing ? 'glow-red' : ''} ${isLive ? 'glow-green' : ''}`} style={{ padding: '2rem', display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}>
             <div style={{ position: 'absolute', top: 0, left: '20%', right: '20%', height: '2px', background: isLive ? 'var(--accent-green)' : (isPositive ? 'var(--accent-green)' : (isPositive === false ? 'var(--accent-red)' : 'var(--accent-indigo)')), opacity: 0.8 }} />
@@ -382,7 +378,7 @@ function HeroCard({ title, value, trend, isPositive, icon, isPulsing = false, is
     );
 }
 
-function InsightChip({ icon, label }: any) {
+function InsightChip({ icon, label }: { icon: React.ReactNode; label: string }) {
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', borderRadius: '100px', fontSize: '0.75rem', color: 'var(--text-secondary)' }} className="neo-inset">
             {icon}{label}
@@ -390,7 +386,7 @@ function InsightChip({ icon, label }: any) {
     );
 }
 
-function ClientRank({ name, amount, percent }: any) {
+function ClientRank({ name, amount, percent }: { name: string; amount: number; percent: number }) {
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.75rem' }}>

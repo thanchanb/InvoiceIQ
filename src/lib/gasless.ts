@@ -52,8 +52,9 @@ export async function buildFeeBumpTransaction(
         const result = await server.submitTransaction(feeBumpTx);
 
         return result.hash;
-    } catch (error: any) {
-        console.error('[gasless] Fee Bump submission failed:', error?.response?.data?.extras?.result_codes ?? error.message);
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error('[gasless] Fee Bump submission failed:', errorMessage);
         throw error;
     }
 }
@@ -104,8 +105,11 @@ export async function buildInnerPaymentTransaction(
  * Returns a mock fee bump hash without hitting the real testnet.
  */
 export async function simulateGaslessTransaction(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     destinationAddress: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     amount: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     memo?: string
 ): Promise<{ success: boolean; hash: string; feesPaidBySponsor: string }> {
     await new Promise(r => setTimeout(r, 2000));

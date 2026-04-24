@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { User, Bell, Shield, Wallet, Check, Key, Cpu, Database, Trash2, RefreshCw } from 'lucide-react';
+import { User, Wallet, Check, Key, Cpu, Database, Trash2, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
 import {
     getProfile, saveProfile, getSettings, saveSettings,
@@ -25,13 +25,16 @@ export default function SettingsPage() {
     const [settings, setSettings] = useState<AppSettings>({ defaultCurrency: 'XLM', defaultDueDays: 30, autoConnectWallet: true, preferUSDC: false });
 
     useEffect(() => {
+         
         setProfile(getProfile());
+         
         setSettings(getSettings());
     }, []);
 
     // Sync connected wallet address into profile
     useEffect(() => {
         if (isConnected && address && !profile.stellarWallet) {
+             
             setProfile(p => ({ ...p, stellarWallet: address }));
         }
     }, [isConnected, address, profile.stellarWallet]);

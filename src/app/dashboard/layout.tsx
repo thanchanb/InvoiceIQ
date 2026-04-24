@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Sidebar from '@/components/dashboard/Sidebar';
-import { Bell, Search, Moon, Sun, Clock, Wallet } from 'lucide-react';
+import { Bell, Search, Wallet } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useWallet } from '@/context/WalletContext';

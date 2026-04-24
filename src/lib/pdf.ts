@@ -6,10 +6,6 @@ export const generateInvoicePDF = (invoice: Invoice) => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    // Primary Colors
-    const primary = [99, 102, 241]; // Indigo
-    const secondary = [16, 185, 129]; // Green
-
     // Header Color
     doc.setFillColor(15, 23, 42); // Slate 900
     doc.rect(0, 0, pageWidth, 50, 'F');
@@ -52,6 +48,7 @@ export const generateInvoicePDF = (invoice: Invoice) => {
     doc.text(new Date(invoice.dueDate).toLocaleDateString(), pageWidth - 55, 78);
 
     // Items Table
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (doc as any).autoTable({
         startY: 100,
         head: [['Description', 'Qty', 'Rate', 'Total']],
@@ -81,6 +78,7 @@ export const generateInvoicePDF = (invoice: Invoice) => {
         margin: { left: 15, right: 15 }
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const finalY = (doc as any).lastAutoTable.finalY + 10;
 
     // Total Section
