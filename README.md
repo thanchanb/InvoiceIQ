@@ -10,6 +10,8 @@
 
 ![InvoiceIQ Dashboard](./public/dapp-screenshot.png)
 
+### 🎥 **[Watch the 1-Minute Demo Video Here](./public/demo-video.mov)**
+
 ---
 
 ## 🔗 Key Links

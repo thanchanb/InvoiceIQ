@@ -1,5 +1,5 @@
 #[cfg(test)]
-mod test {
+mod tests {
     use crate::{InvoiceIQContract, InvoiceIQContractClient};
     use soroban_sdk::{symbol_short, testutils::Address as _, token, Address, Env, String};
 
@@ -23,8 +23,8 @@ mod test {
         // 2. Setup a mock token (e.g. USDC)
         let token_admin = Address::generate(&env);
         let token_id = env.register_stellar_asset_contract_v2(token_admin.clone());
-        let token_client = token::Client::new(&env, &token_id);
-        let token_admin_client = token::StellarAssetClient::new(&env, &token_id);
+        let token_client = token::Client::new(&env, &token_id.address());
+        let token_admin_client = token::StellarAssetClient::new(&env, &token_id.address());
 
         // Mint tokens to the client
         token_admin_client.mint(&client_addr, &10000);
@@ -40,7 +40,7 @@ mod test {
             &id,
             &vendor,
             &client_addr,
-            &token_id,
+            &token_id.address(),
             &amount,
             &description,
             &due_date,
