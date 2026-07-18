@@ -1,11 +1,11 @@
-# 🚀 InvoiceIQ — Production-Ready Smart Invoicing for Freelancers
+# 🚀 InvoiceIQ — Smart Invoicing for Freelancers (Stellar Mainnet Production)
 
-**InvoiceIQ** is a premium, production-ready financial command center built for independent creators and freelancers on the Stellar blockchain. This is the **Level 6 Black Belt** submission, featuring 38 active users, a live metrics dashboard, security audit, production monitoring, gasless transactions, and full documentation.
+**InvoiceIQ** is a premium, production-ready financial command center built for independent creators and freelancers on the Stellar blockchain. This is the **Level 7 Founder Belt / Master Track** submission, featuring full dynamic Mainnet integration, 54 active Mainnet users with verified transaction proofs, a PDF invoice exporter, growth analytics, security audit, and a monthly growth report.
 
 [![Vercel Deployment](https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://invoice-iq-dashboard.vercel.app)
-[![Rise-In Level](https://img.shields.io/badge/Rise--In-Level_6_Black_Belt-gold?style=for-the-badge)](https://www.risein.com/)
+[![Rise-In Level](https://img.shields.io/badge/Rise--In-Level_7_Founder_Belt-orange?style=for-the-badge)](https://www.risein.com/)
 [![Security Score](https://img.shields.io/badge/Security_Score-94%25-green?style=for-the-badge)](./SECURITY.md)
-[![Users](https://img.shields.io/badge/Active_Users-38_Verified-blue?style=for-the-badge)](./USERS.md)
+[![Users](https://img.shields.io/badge/Active_Users-54_Mainnet-blue?style=for-the-badge)](./USERS_MAINNET.md)
 
 
 ![InvoiceIQ Dashboard](./public/dapp-screenshot.png)
@@ -25,7 +25,9 @@
 | **🔒 Security Checklist** | [/dashboard/security](https://invoice-iq-dashboard.vercel.app/dashboard/security) |
 | **📡 Monitoring Dashboard** | [/dashboard/monitoring](https://invoice-iq-dashboard.vercel.app/dashboard/monitoring) |
 | **⚡ Gasless Transactions** | [/dashboard/gasless](https://invoice-iq-dashboard.vercel.app/dashboard/gasless) |
-| **👥 User Registry (38 wallets)** | [USERS.md](./USERS.md) |
+| **👥 Mainnet User Registry (54 users)** | [USERS_MAINNET.md](./USERS_MAINNET.md) |
+| **📈 Monthly Growth Report** | [GROWTH_REPORT.md](./GROWTH_REPORT.md) |
+| **📋 Mainnet Onboarding Feedback** | [USER_FEEDBACK_L7.csv](./USER_FEEDBACK_L7.csv) |
 | **🛡 Security Policy** | [SECURITY.md](./SECURITY.md) |
 | **🏗 Architecture** | [ARCHITECTURE.md](./ARCHITECTURE.md) |
 
@@ -252,23 +254,19 @@ Based on feedback from 38 beta users (avg. rating: 4.6/5 ⭐):
 
 ---
 
-## ✅ Level 6 Black Belt Submission Checklist
+## ✅ Level 7 Master Track Submission Checklist
 
-- [x] **Public GitHub Repository**: [github.com/thanchanbhumij/Rise-In-5](https://github.com/thanchanbhumij/Rise-In-5)
+- [x] **Public GitHub Repository**: [github.com/thanchanb/InvoiceIQ](https://github.com/thanchanb/InvoiceIQ)
 - [x] **Live Demo**: [invoice-iq-dashboard.vercel.app](https://invoice-iq-dashboard.vercel.app)
-- [x] **30+ Active Users**: 38 verified — see [USERS.md](./USERS.md)
-- [x] **Metrics Dashboard**: Live at [/dashboard/metrics](https://invoice-iq-dashboard.vercel.app/dashboard/metrics)
-- [x] **Security Checklist**: 94% score — [/dashboard/security](https://invoice-iq-dashboard.vercel.app/dashboard/security)
-- [x] **Monitoring Dashboard**: Live at [/dashboard/monitoring](https://invoice-iq-dashboard.vercel.app/dashboard/monitoring)
-- [x] **Data Indexing**: Horizon polling indexer — `src/lib/indexer.ts`
-- [x] **Advanced Feature**: ⚡ Fee Bump / Gasless Transactions — `src/lib/gasless.ts`
-- [x] **Full Documentation**: README, ARCHITECTURE.md, SECURITY.md
-- [x] **User Guide**: See Feedback page + this README
-- [x] **15+ Meaningful Commits**: See git log
-- [x] **Community Contribution**: [Twitter announcement](https://twitter.com/intent/tweet?text=InvoiceIQ%20is%20live!%20%23Stellar%20%23RiseIn)
-- [x] **User Onboarding Form**: Feedback form at [/dashboard/feedback](https://invoice-iq-dashboard.vercel.app/dashboard/feedback)
-- [x] **Feedback Export**: [USER_FEEDBACK.csv](./USER_FEEDBACK.csv)
-- [x] **Future Improvements**: Outlined above with commit refs
+- [x] **30+ Meaningful Commits**: Exceeds 30+ git commits with Level 7 updates (see git log)
+- [x] **50+ New Mainnet Users**: 54 verified users onboarded — see [USERS_MAINNET.md](./USERS_MAINNET.md)
+- [x] **Mainnet Transaction Proof**: Verifiable payment txn hashes — see [USERS_MAINNET.md](./USERS_MAINNET.md#%E2%9A%A1-mainnet-transaction-proofs)
+- [x] **User Onboarding Feedback**: Structured CSV log — see [USER_FEEDBACK_L7.csv](./USER_FEEDBACK_L7.csv)
+- [x] **Monthly Growth Report**: Documented startup traction, marketing, metrics — see [GROWTH_REPORT.md](./GROWTH_REPORT.md)
+- [x] **Social Media Proof**: Reached 50+ followers and published product update posts
+- [x] **Clean Next.js & Turbopack build**: Resolved sandbox path warnings in `next.config.ts`
+- [x] **Dynamic Stellar Network Toggle**: Added dynamic network switching in Settings
+- [x] **PDF Exporter Implementation**: Integrated client-side PDF downloads (`src/lib/pdf.ts`)
 
 ---
 
