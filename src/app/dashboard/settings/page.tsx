@@ -18,11 +18,11 @@ const TABS = [
 ];
 
 export default function SettingsPage() {
-    const { address, isConnected } = useWallet();
+    const { address, isConnected, setNetwork } = useWallet();
     const [tab, setTab] = useState('identity');
     const [saved, setSaved] = useState(false);
     const [profile, setProfile] = useState<UserProfile>({ name: '', email: '', currency: 'XLM', businessName: '', stellarWallet: '' });
-    const [settings, setSettings] = useState<AppSettings>({ defaultCurrency: 'XLM', defaultDueDays: 30, autoConnectWallet: true, preferUSDC: false });
+    const [settings, setSettings] = useState<AppSettings>({ defaultCurrency: 'XLM', defaultDueDays: 30, autoConnectWallet: true, preferUSDC: false, network: 'TESTNET' });
 
     useEffect(() => {
          
@@ -42,6 +42,9 @@ export default function SettingsPage() {
     const handleSave = () => {
         saveProfile(profile);
         saveSettings(settings);
+        if (settings.network) {
+            setNetwork(settings.network);
+        }
         setSaved(true);
         setTimeout(() => setSaved(false), 3000);
     };
@@ -161,6 +164,15 @@ export default function SettingsPage() {
                                 <Field label="Default Currency" value="" onChange={() => { }} type="select">
                                     <select value={settings.defaultCurrency} onChange={e => setSettings(s => ({ ...s, defaultCurrency: e.target.value }))} style={inputSt}>
                                         {['XLM', 'USDC', 'USD', 'EUR'].map(c => <option key={c} value={c}>{c}</option>)}
+                                    </select>
+                                </Field>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }}>
+                                <Field label="Active Stellar Network" value="" onChange={() => { }} type="select">
+                                    <select value={settings.network || 'TESTNET'} onChange={e => setSettings(s => ({ ...s, network: e.target.value as 'TESTNET' | 'MAINNET' }))} style={inputSt}>
+                                        <option value="TESTNET">Testnet (Development & Sandbox)</option>
+                                        <option value="MAINNET">Mainnet (Production Blockchain)</option>
                                     </select>
                                 </Field>
                             </div>

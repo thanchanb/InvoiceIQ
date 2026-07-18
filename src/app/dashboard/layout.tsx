@@ -13,7 +13,7 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     const pathname = usePathname();
-    const { address, isConnected, connect, disconnect } = useWallet();
+    const { address, isConnected, connect, disconnect, network } = useWallet();
     const [currentTime, setCurrentTime] = useState('09:41 AM');
 
     useEffect(() => {
@@ -91,7 +91,32 @@ export default function DashboardLayout({
 
                         {/* Wallet Area */}
                         {isConnected ? (
-                            <div style={{ display: 'flex', gap: '1rem' }}>
+                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                {/* Network Badge */}
+                                <div style={{
+                                    padding: '0.45rem 0.85rem',
+                                    borderRadius: '10px',
+                                    fontSize: '0.72rem',
+                                    fontWeight: 800,
+                                    letterSpacing: '0.05em',
+                                    background: network === 'MAINNET' ? 'rgba(0, 255, 178, 0.1)' : 'rgba(245, 158, 11, 0.1)',
+                                    color: network === 'MAINNET' ? 'var(--accent-green)' : 'var(--accent-amber)',
+                                    border: `1px solid ${network === 'MAINNET' ? 'rgba(0, 255, 178, 0.25)' : 'rgba(245, 158, 11, 0.25)'}`,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.4rem',
+                                    boxShadow: network === 'MAINNET' ? '0 0 15px rgba(0, 255, 178, 0.15)' : '0 0 15px rgba(245, 158, 11, 0.15)',
+                                }} className="mono">
+                                    <div style={{
+                                        width: '6px',
+                                        height: '6px',
+                                        borderRadius: '50%',
+                                        background: network === 'MAINNET' ? 'var(--accent-green)' : 'var(--accent-amber)',
+                                        boxShadow: `0 0 6px ${network === 'MAINNET' ? 'var(--accent-green)' : 'var(--accent-amber)'}`
+                                    }} />
+                                    {network}
+                                </div>
+
                                 <motion.button
                                     whileHover={{ scale: 1.02 }}
                                     onClick={disconnect}
@@ -114,26 +139,51 @@ export default function DashboardLayout({
                                 </motion.button>
                             </div>
                         ) : (
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={connect}
-                                style={{
-                                    padding: '0.6rem 1.5rem',
-                                    borderRadius: '12px',
-                                    fontSize: '0.85rem',
+                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                                {/* Disconnected Network Badge */}
+                                <div style={{
+                                    padding: '0.45rem 0.85rem',
+                                    borderRadius: '10px',
+                                    fontSize: '0.72rem',
                                     fontWeight: 800,
-                                    background: 'var(--primary-color)',
-                                    color: 'white',
+                                    letterSpacing: '0.05em',
+                                    background: 'rgba(255, 255, 255, 0.03)',
+                                    color: 'var(--text-muted)',
+                                    border: '1px solid rgba(255, 255, 255, 0.08)',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    gap: '0.75rem',
-                                    boxShadow: '0 10px 20px -5px rgba(99, 102, 241, 0.3)'
-                                }}
-                            >
-                                <Wallet size={16} />
-                                CONNECT WALLET
-                            </motion.button>
+                                    gap: '0.4rem',
+                                }} className="mono">
+                                    <div style={{
+                                        width: '6px',
+                                        height: '6px',
+                                        borderRadius: '50%',
+                                        background: 'var(--text-muted)',
+                                    }} />
+                                    {network}
+                                </div>
+
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={connect}
+                                    style={{
+                                        padding: '0.6rem 1.5rem',
+                                        borderRadius: '12px',
+                                        fontSize: '0.85rem',
+                                        fontWeight: 800,
+                                        background: 'var(--primary-color)',
+                                        color: 'white',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.75rem',
+                                        boxShadow: '0 10px 20px -5px rgba(99, 102, 241, 0.3)'
+                                    }}
+                                >
+                                    <Wallet size={16} />
+                                    CONNECT WALLET
+                                </motion.button>
+                            </div>
                         )}
 
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
