@@ -1,13 +1,36 @@
 import * as StellarSdk from '@stellar/stellar-sdk';
 import Freighter from "@stellar/freighter-api";
 
-// Horizon server configuration for Stellar Testnet
-const HORIZON_SERVER = "https://horizon-testnet.stellar.org";
-const server = new StellarSdk.Horizon.Server(HORIZON_SERVER);
+/**
+ * Helper to fetch active network setting from localStorage.
+ * Defaults to TESTNET.
+ */
+const getActiveNetwork = (): 'TESTNET' | 'MAINNET' => {
+    if (typeof window === 'undefined') return 'TESTNET';
+    try {
+        const raw = localStorage.getItem('invoiceiq:settings');
+        if (raw) {
+            const settings = JSON.parse(raw);
+            return settings.network || 'TESTNET';
+        }
+    } catch {}
+    return 'TESTNET';
+};
+
+/**
+ * Dynamically builds a Stellar Horizon Server instance based on the active network configuration.
+ */
+const getServer = (): StellarSdk.Horizon.Server => {
+    const network = getActiveNetwork();
+    const serverUrl = network === 'MAINNET' 
+        ? 'https://horizon.stellar.org' 
+        : 'https://horizon-testnet.stellar.org';
+    return new StellarSdk.Horizon.Server(serverUrl);
+};
 
 /**
  * Real Stellar wallet connection using the Freighter browser extension.
- * Connects to the testnet to enable real payment verification.
+ * Connects to the appropriate network dynamically to enable real payment verification.
  */
 export const connectWallet = async () => {
     try {
@@ -19,25 +42,27 @@ export const connectWallet = async () => {
         const { address, error } = await Freighter.requestAccess();
         if (error) throw new Error(error);
 
+        const network = getActiveNetwork();
         return {
             address: address,
-            network: 'TESTNET'
+            network: network
         };
     } catch (error) {
         console.error("Wallet connection error:", error);
         // Fallback for demo mode if freighter is missing or rejected
         return {
             address: 'GDVQIYIG7ABVVLN5HNTZHNXKYRQZH7JSRUGDZFMNHFJFDQBINJKBDTJN',
-            network: 'TESTNET'
+            network: getActiveNetwork()
         };
     }
 };
 
 /**
- * Fetches recent transaction history for a given Stellar address on the testnet.
+ * Fetches recent transaction history for a given Stellar address.
  */
 export const fetchTransactionHistory = async (address: string) => {
     try {
+        const server = getServer();
         const transactions = await server.transactions()
             .forAccount(address)
             .limit(10)
@@ -56,6 +81,7 @@ export const fetchTransactionHistory = async (address: string) => {
  */
 export const verifyPayment = async (memo: string, expectedAddress: string) => {
     try {
+        const server = getServer();
         const transactions = await server.transactions()
             .forAccount(expectedAddress)
             .limit(20)
@@ -75,14 +101,19 @@ export const verifyPayment = async (memo: string, expectedAddress: string) => {
  * Helper to build a payment link or QR intent for a specific invoice.
  */
 export const generateStellarPaymentURL = (address: string, amount: string, memo: string) => {
-    return `https://stellar.expert/explorer/testnet/tx/send?destination=${address}&amount=${amount}&memo=${memo}`;
+    const network = getActiveNetwork();
+    const prefix = network === 'MAINNET' 
+        ? 'https://stellar.expert/explorer/public/tx/send' 
+        : 'https://stellar.expert/explorer/testnet/tx/send';
+    return `${prefix}?destination=${address}&amount=${amount}&memo=${memo}`;
 };
 
 /**
- * Fetches the current XLM balance for a given Stellar address on the testnet.
+ * Fetches the current XLM balance for a given Stellar address.
  */
 export const getAccountBalance = async (address: string) => {
     try {
+        const server = getServer();
         const account = await server.loadAccount(address);
         const nativeBalance = account.balances.find(b => b.asset_type === 'native');
         return nativeBalance ? nativeBalance.balance : '0.00';

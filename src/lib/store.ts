@@ -59,6 +59,7 @@ export interface AppSettings {
     defaultDueDays: number;
     autoConnectWallet: boolean;
     preferUSDC: boolean;
+    network?: 'TESTNET' | 'MAINNET';
 }
 
 const KEYS = {
@@ -166,6 +167,7 @@ export function getSettings(): AppSettings {
         defaultDueDays: 30,
         autoConnectWallet: true,
         preferUSDC: false,
+        network: 'TESTNET',
     });
 }
 
