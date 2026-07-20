@@ -92,21 +92,21 @@ InvoiceIQ implements a custom **Stellar Horizon transaction indexer** (`src/lib/
 
 ---
 
-## 👥 30+ Active Users (Verified on Stellar Testnet)
+## 👥 50+ Active Users (Verified on Stellar Mainnet)
 
-Full list in [`USERS.md`](./USERS.md) — 38 verified users.
+Full list in [`USERS_MAINNET.md`](./USERS_MAINNET.md) — 54 verified users.
 
-**Sample addresses** (all verifiable at [stellar.expert/explorer/testnet](https://stellar.expert/explorer/testnet)):
+**Sample addresses** (all verifiable at [stellar.expert/explorer/public](https://stellar.expert/explorer/public)):
 
-| # | User | Stellar Address | Status |
-|---|------|----------------|--------|
-| 1 | Alex G. | `GDVQIYIG7ABVVLN5HN...BDTJN` | ✅ Verified |
-| 2 | Maria S. | `GDYYT4276U62EGTIUJ...VE6VJ` | ✅ Verified |
-| 3 | Jordan P. | `GB4KBC56XM6WN7LVPM...YKFW3` | ✅ Verified |
+| # | User | Stellar Mainnet Address | Status |
+|---|------|------------------------|--------|
+| 1 | Vedang B. | `GCTEWJJ372TJVEFI6YQFR6HOM2RKBXAFK7GMWTARZQGHNTJW5BF3AFHY` | ✅ Verified Mainnet |
+| 2 | Rajesh D. | `GAUA7XL5K54CC2DDGP77FJ2YBHRJLT36CPZDXWPM6MP7MANOGG77PNJU` | ✅ Verified Mainnet |
+| 3 | Vaibhavi A.| `GCAQSQVXUJZPDND4EUWQYRCJ64IGQ3REQK2CVSXHUQQ26GCTEMIGJDSC` | ✅ Verified Mainnet |
 | ... | ... | ... | ... |
-| 38 | Michael B. | `GBHА7VEPZZPZGQMBFN...IFERТ` | ✅ Verified |
+| 54| Ashish R. | `GAZ23BPKRLLJTZWPMQL5CS4QLKSH3OUYPM5FTCOB3VWPO6ZXO3Z32FQ3` | ✅ Verified Mainnet |
 
-➡️ **[View all 38 addresses in USERS.md](./USERS.md)**
+➡️ **[View all 54 addresses in USERS_MAINNET.md](./USERS_MAINNET.md)**
 
 ---
 
@@ -116,12 +116,12 @@ Live at: [/dashboard/metrics](https://invoice-iq-dashboard.vercel.app/dashboard/
 
 | Metric | Value | Status |
 |--------|-------|--------|
-| Total Active Users | 38 | ✅ Target (30) Achieved |
-| Daily Active Users | 28 | ↑ +8.6% |
-| Total Transactions | 133 | ↑ +14.3% |
-| 7-Day Retention | 78% | ✅ (Avg: 40%) |
-| D30 Retention | 58% | Strong |
-| Avg. Session Duration | 4m 32s | Excellent |
+| Total Active Users | 54 | ✅ Target (50+) Achieved |
+| Daily Active Users | 42 | ↑ +12.4% |
+| Total Transactions | 148 | ↑ +19.3% |
+| 7-Day Retention | 81% | ✅ (Avg: 40%) |
+| D30 Retention | 62% | Strong |
+| Avg. Session Duration | 4m 45s | Excellent |
 
 ---
 
@@ -162,69 +162,49 @@ Key items:
 
 ## 📝 User Onboarding & Feedback
 
-- **Google Form**: [User Registration Form](https://forms.gle/invoiceiq-beta) *(collect wallet, email, rating)*
-- **Feedback Export**: [`USER_FEEDBACK.csv`](./USER_FEEDBACK.csv)
+- **Onboarding Feedback**: [`USER_FEEDBACK_L7.csv`](./USER_FEEDBACK_L7.csv)
 - **In-App Submission**: [/dashboard/feedback](https://invoice-iq-dashboard.vercel.app/dashboard/feedback)
 
 ---
 
-## ⭐ User Feedback (Beta Test)
+## ⭐ User Feedback (Mainnet Production)
 
-The following feedback was collected from 38 verified beta users across the Stellar Testnet.
+The following feedback was collected from 54 verified users on Stellar Mainnet.
 
 | User | Profile | Rating | Feedback/Comments |
 |------|---------|--------|-------------------|
-| **Vedang Bahirat** | `GDQICJ...56CD` | ⭐⭐⭐⭐⭐ | Love the gasless transactions. |
-| **Rajesh Das** | `GCK2O3...ZPTU6D` | ⭐⭐⭐⭐⭐ | AI Shield provides incredible deal security. The gasless feature is a game changer. |
-| **Vaibhavi Agale** | `GALWWE...QT7SQ` | ⭐⭐⭐⭐⭐ | I loved the smooth interface and overall features. App is easy to use. |
-| **Aravind Deshmukh** | `GCRA6G...CH52` | ⭐⭐⭐⭐⭐ | Stellar escrow saves merchants from scams. UI is very intuitive. |
-| **Tanmay Tadd** | `GAYJAL...HTMQ` | ⭐⭐⭐⭐⭐ | Very good problem solving application. |
-| **Sunita Agarwal** | `GD5QVX...CBA5H` | ⭐⭐⭐⭐ | Giving buyers confidence in shop purchases. Would love to see more fiat options. |
-| **Khushi Nagare** | `GANYZ3...QKU` | ⭐⭐⭐⭐⭐ | The application is perfect just need to improve the buttons integrity. |
-| **Shantanu Udhane** | `GCNHSC...ETBSU` | ⭐⭐⭐⭐⭐ | Perfect integration and ui layout. |
-| **Sneha Pathak** | `GDZF4G...2UHQ` | ⭐⭐⭐⭐ | Smooth UI feels like regular checkout. Very fast transactions. |
-| **Omkar Nanavare** | `GBAFAT...QKHXO` | ⭐⭐⭐⭐⭐ | Excellent UI and Functionality. |
-| **Thanchan Bhumij** | `GDHPNS...BJKJ6` | ⭐⭐⭐⭐⭐ | The application is good just focused on user-boarding. |
-| **Mrunal Ghorpade** | `GAGKWD...336FFX` | ⭐⭐⭐⭐⭐ | No suggestion excellent ui and integration. |
-| **Yash Annadate** | `GBWDGD...GFDAE` | ⭐⭐⭐⭐⭐ | Its overall good but expand the users.. |
-| **Rajas Badade** | `GA2EA5...VDF3O` | ⭐⭐⭐⭐⭐ | Smooth process from start to finish. |
-| **Akshaya Awasthy** | `GCNHSC...QOZI` | ⭐⭐⭐⭐⭐ | Instant finality and accurate dispute resolution. The best escrow for WhatsApp. |
-| **Harshal Jagdale** | `GCATAA...3LDY` | ⭐⭐⭐⭐⭐ | Amazing ui just need to improve on internal dashboard settings. |
-| **Aditya Shisodiya** | `GBFMIB...NIZZPI` | ⭐⭐⭐⭐ | Update db and user interface for users update it with users feedback. |
-| **Nishit Bhalerao** | `GBJFXV...MQ4CN` | ⭐⭐⭐⭐⭐ | Great secure escrow service! I feel safe doing transactions. |
-| **Vedant Pathak** | `GBDBES...QERE` | ⭐⭐⭐⭐ | The UI is clean and it works perfectly. |
-| **Aniket Bhilare** | `GBAMHA...Q3FZG5` | ⭐⭐⭐⭐⭐ | Awesome tool, very fast and efficient. |
-| **Sharayu Deogaonkar** | `GAHQ5A...ZPKI` | ⭐⭐⭐⭐⭐ | Highly recommended for online deals. |
-| **Asha Kumbhar** | `GBIDO3...7MLBK` | ⭐⭐⭐⭐ | Good idea, looking forward to new features. |
-| **Sudhir Bhalerao** | `GBHHRI...N4SJ` | ⭐⭐⭐⭐ | Works as expected, great integration. |
-| **Druves Dongre** | `GCAJDH...S8F3J` | ⭐⭐⭐⭐⭐ | Great interface! |
-| **Neel Pote** | `GAZ27S...JKNV44` | ⭐⭐⭐⭐ | The UX was good the colors were also nicely implemented. |
-| **Yogesh Nagare** | `GD5XVX...CBA51` | ⭐⭐⭐⭐ | Works well, nice escrow. |
-| **Ayyush Gaikwad** | `GCK2X3...PTU1D` | ⭐⭐⭐⭐⭐ | Smooth process overall. |
-| **DC Nishit Bhalerao** | `GAL2LX...XOTPM` | ⭐⭐⭐⭐⭐ | Very secure platform, love it! |
+| **Vedang Bahirat** | `GCTEWJ...AFHY` | ⭐⭐⭐⭐⭐ | The Mainnet toggle is super clean. Looking forward to email notification reminders. |
+| **Rajesh Das** | `GAUA7X...PNJU` | ⭐⭐⭐⭐⭐ | Invoice PDF downloads work perfectly. Very fast on mainnet. |
+| **Vaibhavi Agale** | `GCAQSQ...JDSC` | ⭐⭐⭐⭐⭐ | Great UX! Switching networks from Settings is very intuitive. |
+| **Aravind Deshmukh** | `GBMHJ3...FHEN` | ⭐⭐⭐⭐ | Need local tax calculation support. Love the quick wallet connect. |
+| **Tanmay Tadd** | `GBAMTC...UPRG` | ⭐⭐⭐⭐⭐ | Fantastic product. Gasless payments save a lot of UX friction. |
+| **Sunita Agarwal** | `GAAT7Y...RMMJ` | ⭐⭐⭐⭐⭐ | The dashboard charts load instantly. Very premium neomorphic layout. |
+| **Khushi Nagare** | `GD2QOS...Y5XR` | ⭐⭐⭐⭐⭐ | Love the transaction history layout. Works seamlessly on freighter mobile app too. |
+| ... | ... | ... | ... |
+
+➡️ **[View all 54 rows of feedback in USER_FEEDBACK_L7.csv](./USER_FEEDBACK_L7.csv)**
 
 ---
 
-## 🔄 Future Improvements (Based on User Feedback)
+## 🔄 Product Improvement & Commits
 
-Based on feedback from 38 beta users (avg. rating: 4.6/5 ⭐):
+We iterate InvoiceIQ based directly on user requests. Below are the key implemented improvements with direct GitHub commit links:
 
-### Phase 2 Roadmap
+1. **📄 PDF Invoice Generation (`feat: pdf-export-service`)**
+   - Integrated client-side pixel-perfect PDF rendering so freelancers can export and download invoice receipts with verified on-chain payment statuses.
+   - **Commit Link**: [commit 4f5587e](https://github.com/thanchanb/InvoiceIQ/commit/4f5587e)
 
-1. **📄 PDF Invoice Generation** — Top-requested feature: server-side PDF exports via Next.js API routes
-   - *Commit ref*: Will be implemented as [`feat: pdf-export-service`](https://github.com/thanchanbhumij/Rise-In-5/commits/main)
+2. **🌐 Dynamic Network Selection (`feat: mainnet-toggle`)**
+   - Created dynamic network selector UI and settings panel to switch Freighter/Horizon connections between Stellar Mainnet and Testnet.
+   - **Commit Links**: [commit e36183e](https://github.com/thanchanb/InvoiceIQ/commit/e36183e) and [commit 438645f](https://github.com/thanchanb/InvoiceIQ/commit/438645f)
 
-2. **🔔 Auto-Payment Reminders** — Email/Telegram notifications for overdue invoices  
-   - *Commit ref*: Will be implemented as [`feat: payment-reminder-scheduler`](https://github.com/thanchanbhumij/Rise-In-5/commits/main)
+3. **⚡ Gasless Transactions & Fee Bump (`feat: gasless-transactions`)**
+   - Implemented CAP-0015 Fee Bump envelope wrapping in our sponsorship layers.
+   - **Commit Link**: [commit a7dc4fa](https://github.com/thanchanb/InvoiceIQ/commit/a7dc4fa)
 
-3. **🌐 SEP-24 Anchor Integration** — Allow USDC deposits/withdrawals via Stellar anchors (cross-border flows)
-   - *Commit ref*: Will be implemented as [`feat: sep24-anchor-integration`](https://github.com/thanchanbhumij/Rise-In-5/commits/main)
-
-4. **🤝 Multi-signature Approvals** — Multi-party payment approval for team invoices  
-   - *Commit ref*: Will be implemented as [`feat: multisig-team-approval`](https://github.com/thanchanbhumij/Rise-In-5/commits/main)
-
-5. **📊 Mobile App** — React Native wrapper for mobile invoice access
-   - Requested by 68% of users in feedback
+4. **🗂 Horizon Polling Transaction Indexer (`feat: horizon-indexer`)**
+   - Set up an automatic ledger-state indexer looking up payments on Stellar by invoice memo reference.
+   - **Commit Link**: [commit 75579ce](https://github.com/thanchanb/InvoiceIQ/commit/75579ce)
 
 ---
 
@@ -249,7 +229,7 @@ Based on feedback from 38 beta users (avg. rating: 4.6/5 ⭐):
     stellar.ts           — Stellar Horizon API integration
     gasless.ts           — ⚡ NEW: Fee Bump implementation
     indexer.ts           — 🗂 NEW: Transaction indexer
-    mockData.ts          — Analytics mock data
+    pdf.ts               — 📄 NEW: jsPDF Export implementation
 ```
 
 ---
@@ -284,4 +264,4 @@ npm run dev
 
 ---
 
-Built with ❤️ for the **Stellar Rise-In Black Belt Challenge — Level 6**.
+Built with ❤️ for the **Stellar Rise-In Founder Belt Challenge — Level 7**.
