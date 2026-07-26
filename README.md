@@ -243,7 +243,12 @@ We iterate InvoiceIQ based directly on user requests. Below are the key implemen
 - [x] **Mainnet Transaction Proof**: Verifiable payment txn hashes — see [USERS_MAINNET.md](./USERS_MAINNET.md#%E2%9A%A1-mainnet-transaction-proofs)
 - [x] **User Onboarding Feedback**: Structured CSV log — see [USER_FEEDBACK_L7.csv](./USER_FEEDBACK_L7.csv)
 - [x] **Monthly Growth Report**: Documented startup traction, marketing, metrics — see [GROWTH_REPORT.md](./GROWTH_REPORT.md)
-- [x] **Social Media Proof**: Reached 50+ followers and published product update posts
+- [x] **Social Media Proof**: Reached 58 followers and published product update posts on Twitter/X
+  - *Proof Screenshot*: [public/social-media-proof.png](./public/social-media-proof.png)
+  - ![Twitter/X Proof](./public/social-media-proof.png)
+- [x] **Community Contribution**: Contributed to Stellar forums on CAP-0015 Fee Bumps
+  - *Proof Screenshot*: [public/community-contribution-proof.png](./public/community-contribution-proof.png)
+  - ![Discord Contribution Proof](./public/community-contribution-proof.png)
 - [x] **Clean Next.js & Turbopack build**: Resolved sandbox path warnings in `next.config.ts`
 - [x] **Dynamic Stellar Network Toggle**: Added dynamic network switching in Settings
 - [x] **PDF Exporter Implementation**: Integrated client-side PDF downloads (`src/lib/pdf.ts`)

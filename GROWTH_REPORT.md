@@ -47,6 +47,8 @@ To acquire 50+ new Mainnet users, we implemented three main acquisition channels
 ## 4. Brand & Social Media Growth
 - **Follower Growth**: We established an active presence on Twitter/X, reaching **58 followers** as of July 2026.
   - **Social Profile Proof**: [InvoiceIQ Twitter/X Profile](https://x.com/InvoiceIQ_App)
+  - **Visual Profile & Post Proof**:
+    ![InvoiceIQ Twitter Profile & Update Posts Proof](./public/social-media-proof.png)
 - **Product Update Posts**:
   - *Post 1 (Launch Announcement)*: "We are thrilled to launch InvoiceIQ on Stellar Mainnet! Say goodbye to invoice processing fees and hello to instant Web3 settlement. Check out our neomorphic dashboard. #Stellar #BuildOnStellar"
     - **Post Link**: [Stellar Mainnet Launch Post](https://x.com/InvoiceIQ_App/status/1798364201948291072)
@@ -55,6 +57,8 @@ To acquire 50+ new Mainnet users, we implemented three main acquisition channels
 - **Community Contribution**:
   - Contributed to Stellar Discord Forums regarding CAP-0015 Fee Bump implementation experiences, helping developers learn how to wrap inner payment envelopes for sponsored user transactions.
     - **Forum Contribution Link**: [Stellar Dev Discord Thread](https://discord.com/channels/897530770381008956/897530770850754593/1253381040854634567)
+    - **Visual Forums Proof**:
+      ![Stellar Dev Discord CAP-0015 Community Contribution](./public/community-contribution-proof.png)
   - Published open-source helper wrappers for dynamic network selection in Freighter dApps.
     - **Helper Wrapper Link**: [Freighter Connect helper in stellar.ts](https://github.com/thanchanb/InvoiceIQ/blob/main/src/lib/stellar.ts#L35-L58)
 
