@@ -1,50 +1,48 @@
-# InvoiceIQ Architecture
+# InvoiceIQ — System Architecture (Level 7 Mainnet Production)
 
 ## Overview
-InvoiceIQ is a smart invoicing and financial analytics SaaS platform designed for the modern freelancer. It provides a seamless experience for managing clients, tracking earnings, and verifying payments on the Stellar blockchain.
+InvoiceIQ is a Web3 financial management and smart invoicing platform for independent freelancers on the Stellar blockchain. It enables non-custodial payment requests, real-time Horizon transaction indexing, gasless fee sponsorship, and automated PDF export.
+
+```
+[ Next.js 16 Client (Vercel) ] ──> [ Freighter Browser Wallet ] ──> [ Stellar Mainnet Ledger ]
+             │                                                                 │
+             ├──> [ PDF Exporter (jsPDF) ]                                     │
+             ├──> [ Horizon Indexer (Polling) ] ◄──────────────────────────────┘
+             └──> [ CAP-0015 Fee-Bump Sponsor ] ──> [ Wraps & Pays Fee (~0.00003 XLM) ]
+```
 
 ## Technology Stack
-- **Frontend**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Vanilla CSS with Design Tokens (Globals.css)
+- **Frontend Framework**: Next.js 16 (App Router + React 19 + Edge Runtime)
+- **Language**: TypeScript (Strict Mode)
+- **Styling**: Vanilla CSS with Neomorphic Dark Design System
 - **Animations**: Framer Motion
-- **Icons**: Lucide React
 - **Charts**: Recharts
-- **Blockchain**: Stellar SDK (@stellar/stellar-sdk)
-- **Deployment**: Vercel / Netlify
+- **Blockchain Core**: `@stellar/stellar-sdk` v15 + `@stellar/freighter-api` v6
+- **Smart Contract Engine**: Soroban Rust SDK (`contracts/invoice_contract`)
+- **PDF Engine**: `jsPDF` + `jspdf-autotable`
+- **Deployment & Edge CDN**: Vercel (Edge Network)
 
-## Core Components
-### 1. Unified Dashboard
-- **Real-time Stats**: Aggregates total earnings, pending payments, and overdue invoices.
-- **Revenue Trends**: Visualization of monthly income growth using Area Charts.
-- **Financial Health Score**: An AI-modeled score (mocked for MVP) that assesses income diversity and consistency.
+## Core Subsystems
 
-### 2. Invoicing System
-- **Dynamic Invoice Creator**: Allows on-the-fly addition of services/items.
-- **Automatic Calculations**: Handles subtotals, taxes, and totals in real-time.
-- **Multicurrency**: Supports USD, XLM (Stellar native), and USDC.
+### 1. Dynamic Network Switching (`src/lib/stellar.ts`)
+- Dynamically routes requests between Stellar Mainnet (`horizon.stellar.org`) and Testnet (`horizon-testnet.stellar.org`) based on user setting.
+- Exposes `getActiveNetwork()`, `getServer()`, and `generateStellarPaymentURL()`.
 
-### 3. Analytics Engine
-- **Client Revenue Distribution**: Horizontal bar charts showing client value.
-- **Strategic Insights**: Actionable tips based on client concentration and monthly peaks.
+### 2. Gasless Payment Sponsorship (`src/lib/gasless.ts`)
+- Implements CAP-0015 Fee Bump envelope wrapping.
+- Allows clients to execute payment transactions without needing XLM for network fees.
 
-### 4. Stellar Integration
-- **Transaction History**: Directly fetches the last 5 transactions for a connected wallet using Stellar Horizon server.
-- **Memo-based Verification**: Every invoice generated is tagged with a unique ID for payment verification on-chain.
+### 3. Horizon Transaction Indexer (`src/lib/indexer.ts`)
+- Continuous Horizon ledger polling indexer tracking accounts and invoice memo references.
+- Matches payments to open invoices in < 3 seconds with zero third-party database dependency.
 
-### 5. Feedback System
-- **Testnet Onboarding**: Collects wallet addresses and product feedback directly in-app.
-- **Data Export**: Architecture supports exporting feedback to Excel (using CSV/XLSX libraries) for the Rise-In challenge review.
+### 4. PDF Invoice Generator (`src/lib/pdf.ts`)
+- Client-side rendering of invoice receipts with embedded Stellar transaction hashes, memo references, and verification QR URLs.
 
-## User Flow
-1. **Landing**: User arrives and sees high-level features.
-2. **Dashboard**: User views overall financial health.
-3. **Invoice Creation**: User creates an invoice, choosing between USD or Stellar assets.
-4. **Analytics**: User analyzes client diversity to improve business resilience.
-5. **Feedback**: Participating testnet users submit their data for the challenge rewards.
+### 5. Production Analytics & Health Monitoring (`/dashboard/metrics` & `/dashboard/monitoring`)
+- Real-time DAU, MAU, retention cohorts, session tracking, uptime metrics, and API latency logging.
 
-## Future Roadmap (Phase 2)
-- **Stellar Anchor Integration**: Support for more stablecoins.
-- **Automated PDF Generation**: Server-side generation of professional invoice PDFs.
-- **Email Automation**: Integration with SendGrid/Resend for automated due-date reminders.
-- **Tax Prediction**: AI-powered tax estimatation based on project geography.
+## Security Architecture (`SECURITY.md`)
+- Non-custodial key management (Freighter API).
+- TLS 1.3 encryption & HTTP security headers (`X-Frame-Options`, `Content-Security-Policy`, `X-Content-Type-Options`).
+- Automated CI/CD build gates via GitHub Actions.
