@@ -5,7 +5,7 @@ import Freighter from "@stellar/freighter-api";
  * Helper to fetch active network setting from localStorage.
  * Defaults to TESTNET.
  */
-const getActiveNetwork = (): 'TESTNET' | 'MAINNET' => {
+export const getActiveNetwork = (): 'TESTNET' | 'MAINNET' => {
     if (typeof window === 'undefined') return 'TESTNET';
     try {
         const raw = localStorage.getItem('invoiceiq:settings');
@@ -20,7 +20,7 @@ const getActiveNetwork = (): 'TESTNET' | 'MAINNET' => {
 /**
  * Dynamically builds a Stellar Horizon Server instance based on the active network configuration.
  */
-const getServer = (): StellarSdk.Horizon.Server => {
+export const getServer = (): StellarSdk.Horizon.Server => {
     const network = getActiveNetwork();
     const serverUrl = network === 'MAINNET' 
         ? 'https://horizon.stellar.org' 
