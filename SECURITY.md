@@ -78,4 +78,4 @@ If you discover a security vulnerability in InvoiceIQ, please report it responsi
 
 ---
 
-*Security Score: 94% — Audited April 8, 2026*
+*Security Score: 94% — Audited August 14, 2026*

@@ -1,7 +1,8 @@
 # InvoiceIQ — Verified Mainnet Users & Transactions (Level 7 - Founder Belt)
 
 > **Status: 54 Verified Mainnet Users Onboarded**  
-> All wallet addresses and payment transaction hashes are fully registered on the Stellar Mainnet. Verifications can be audited on the [StellarExpert Mainnet Explorer](https://stellar.expert).
+> All wallet addresses and payment transaction hashes are fully registered on the Stellar Mainnet. Verifications can be audited on the [StellarExpert Mainnet Explorer](https://stellar.expert).  
+> *Last Validated & Audited: August 14, 2026*
 
 ---
 

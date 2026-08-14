@@ -1,5 +1,5 @@
 # InvoiceIQ — System Architecture (Level 7 Mainnet Production)
-
+*Last Updated & Verified: August 14, 2026*
 ## Overview
 InvoiceIQ is a Web3 financial management and smart invoicing platform for independent freelancers on the Stellar blockchain. It enables non-custodial payment requests, real-time Horizon transaction indexing, gasless fee sponsorship, and automated PDF export.
 
