@@ -98,11 +98,11 @@ See full list of 54 users in [`USERS_MAINNET.md`](./USERS_MAINNET.md) & [`USERS.
 
 | # | User Name | Mainnet Stellar Public Key | Status |
 |---|-----------|---------------------------|--------|
-| 1 | Vedang Bahirat | `GCTEWJJ372TJVEFI6YQFR6HOM2RKBXAFK7GMWTARZQGHNTJW5BF3AFHY` | ✅ Verified Mainnet |
-| 2 | Rajesh Das | `GAUA7XL5K54CC2DDGP77FJ2YBHRJLT36CPZDXWPM6MP7MANOGG77PNJU` | ✅ Verified Mainnet |
-| 3 | Vaibhavi Agale | `GCAQSQVXUJZPDND4EUWQYRCJ64IGQ3REQK2CVSXHUQQ26GCTEMIGJDSC` | ✅ Verified Mainnet |
+| 1 | Vedang Bahirat | `GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD` | ✅ Verified Mainnet |
+| 2 | Rajesh Das | `GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD` | ✅ Verified Mainnet |
+| 3 | Vaibhavi Agale | `GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD` | ✅ Verified Mainnet |
 | ... | ... | ... | ... |
-| 54 | Ashish Rane | `GAZ23BPKRLLJTZWPMQL5CS4QLKSH3OUYPM5FTCOB3VWPO6ZXO3Z32FQ3` | ✅ Verified Mainnet |
+| 54 | Ashish Rane | `GCDBX7GTQWJFTAJCJUGV4KXJZE6Q527YRLW75GYDJ2ODSVBOXCS4W7VS` | ✅ Verified Mainnet |
 
 ---
 

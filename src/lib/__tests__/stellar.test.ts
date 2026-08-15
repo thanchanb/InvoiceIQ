@@ -7,7 +7,7 @@ describe('Stellar Integration Utility Unit Tests', () => {
     });
 
     test('generateStellarPaymentURL generates correct mainnet explorer URL', () => {
-        const address = 'GCTEWJJ372TJVEFI6YQFR6HOM2RKBXAFK7GMWTARZQGHNTJW5BF3AFHY';
+        const address = 'GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD';
         const amount = '58.25';
         const memo = 'INV-041';
         

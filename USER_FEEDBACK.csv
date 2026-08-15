@@ -1,55 +1,55 @@
 Timestamp,Full Name,Email,Stellar Wallet Address,Rating (1-5),What features would you like to see next?
-"2026-06-10 09:10","Vedang Bahirat","vedang.bahirat@gmail.com","GCTEWJJ372TJVEFI6YQFR6HOM2RKBXAFK7GMWTARZQGHNTJW5BF3AFHY",4,"The Mainnet toggle is super clean. Looking forward to email notification reminders."
-"2026-06-10 10:11","Rajesh Das","rajesh.das@gmail.com","GAUA7XL5K54CC2DDGP77FJ2YBHRJLT36CPZDXWPM6MP7MANOGG77PNJU",5,"Invoice PDF downloads work perfectly. Very fast on mainnet."
-"2026-06-10 11:12","Vaibhavi Agale","vaibhavi.agale@outlook.com","GCAQSQVXUJZPDND4EUWQYRCJ64IGQ3REQK2CVSXHUQQ26GCTEMIGJDSC",4,"Great UX! Switching networks from Settings is very intuitive."
-"2026-06-11 12:13","Aravind Deshmukh","aravind.deshmukh@yahoo.com","GBMHJ3HPMEE7BWI53FMOYCJ4UGBGU2X72I7MT4YCQEZHQKGRNPO2FHEN",5,"Need local tax calculation support. Love the quick wallet connect."
-"2026-06-11 13:14","Tanmay Tadd","tanmay.tadd@gmail.com","GBAMTC2X47ZKJPVCREVCVEWIAVIOXGPPIHLS4NN5LGE4BAVYQZ5JUPRG",4,"Fantastic product. Gasless payments save a lot of UX friction."
-"2026-06-11 14:15","Sunita Agarwal","sunita.agarwal@techdesign.io","GAAT7YWMOLIKDADZGWH32W3E3HD2UP4SURNXYF34IO2DR6YMXUZORMMJ",5,"The dashboard charts load instantly. Very premium neomorphic layout."
-"2026-06-12 15:16","Khushi Nagare","khushi.nagare@gmail.com","GD2QOSFNNRIORN5SLT5RXQ63V2CDXDQHF7ZP4T4HWQUMLVFPEYGVY5XR",4,"Love the transaction history layout. Works seamlessly on freighter mobile app too."
-"2026-06-12 16:17","Shantanu Udhane","shantanu.udhane@hotmail.com","GAXKIZGOZ4QKIHDGCWSJO6FOYIS6U2P4GJNJ6L2MFZ7R7QQJXEONYYVT",5,"Excellent speed. Would be great if we could add custom client fields."
-"2026-06-12 09:18","Sneha Pathak","sneha.pathak@freelanceweb.co","GBFTDB5ZFZLXSQGDFA3LHAPDFFWENVWWKXYB3VHRF345WV3AD32ZEVHP",4,"I paid an invoice with USDC on mainnet. The polling verified it in 3 seconds!"
-"2026-06-13 10:19","Omkar Nanavare","omkar.nanavare@gmail.com","GDHHI2PBBPTTPUKWG2A3JOQBTKMBSLQALDUZGGG5QJLVM7YKNF52XVUU",5,"Perfect invoicing system. Dynamic network toggle works like a charm."
-"2026-06-13 11:20","Thanchan Bhumij","thanchan.bhumij@gmail.com","GB5LFT2N4B7BKZBVHZ4HRCB7DKEKRZI7VDDPFN4BSQ2HVCNEG74LQQ2K",4,"The new PDF export is very clean. Highly recommend for any freelancer."
-"2026-06-13 12:21","Mrunal Ghorpade","mrunal.ghorpade@outlook.com","GCPLNANLXTV2G6NPIRDPOLM5NAO5XH2IPYQBZCTTAKPNV4IRTU5X5B4S",5,"Everything is fully operational. On-chain validation behaves excellently."
-"2026-06-14 13:22","Yash Annadate","yash.annadate@gmail.com","GAXLLVGZNV5VAUS4BA5T4UZA4B5Q2RZY2327MZL7D6R5GURSAVTTGANZ",4,"Would love to see some integration with accounting tools like QuickBooks."
-"2026-06-14 14:23","Rajas Badade","rajas.badade@yahoo.com","GDDWUXF37JWJLIH4QHIPMB7AJ3GUXOV3WURSZN77EPCWRM5WQX2UCZJV",5,"Invoicing flows are solid and the fee sponsorship is exactly what Stellar needed."
-"2026-06-14 15:24","Akshaya Awasthy","akshaya.awasthy@gmail.com","GA57AA5RIZYEIKNI3GYFG2COEBW5JYL4CW2VXKZD6FQDVPRQWC2S74SF",4,"Professional dashboard. Fast, gasless, and premium look."
-"2026-06-15 16:25","Harshal Jagdale","harshal.jagdale@gmail.com","GDFJSDCP26QUTG5YI6H3ZYVPMI4KZE3OGK2OA47U4PMFWJ7FP65YECO4",5,"Super fast payments. Love that we can toggle between Testnet and Mainnet."
-"2026-06-15 09:26","Aditya Shisodiya","aditya.shisodiya@outlook.com","GCQXTYKW2GHP64C6IFS5Y255YDWBMF7DHR2JXQ7BOIH5PRQOEBSE22KP",4,"Aesthetically pleasing UI, neomorphism done right. Stellar integration is flawless."
-"2026-06-15 10:27","Nishit Bhalerao","nishit.bhalerao@yahoo.com","GCFKWDDIAQEEJWAFHL4Y55VPXHATBJLB2RJ6KOCQNRZA3E3YZ576ZZX7",5,"Freighter wallet connect was seamless. Looking forward to Soroban smart contracts."
-"2026-06-16 11:28","Vedant Pathak","vedant.pathak@gmail.com","GDVIQFRCYJLBPB3HLU2EBKAZXEFHU2JEZP6D3W7KYOZ4QLC6FMBOATMI",4,"It is very easy to generate invoice pdfs. A must-have tool for web3 contractors."
-"2026-06-16 12:29","Aniket Bhilare","aniket.bhilare@techdesign.io","GBHPB7ZQXY55QJAYMI5V4KMAMX6BZQDLXKIMQN3AFCUCQ4EJ3ROXNWDQ",5,"Stellar's fast settlement is amazing. Very clean implementation."
-"2026-06-16 13:30","Sharayu Deogaonkar","sharayu.deogaonkar@gmail.com","GAORIIUJ7YU6IB4ZKBHWIOKB2GHV3V3PRVGK7JVSJLXIHXDQAZQRSVFX",4,"Great application. Can you add support for recurring invoices?"
-"2026-06-17 14:31","Asha Kumbhar","asha.kumbhar@hotmail.com","GBKQLNTTILP3YQDAYZZRYOOQYGTHTDJQMQQBMNSQ6VBOP3NCEPQNOMEN",5,"Very reliable tracking of pending and paid invoices. Good job!"
-"2026-06-17 15:32","Sudhir Bhalerao","sudhir.bhalerao@freelanceweb.co","GDEPJFKG63XUZARP626ZVHJRXM5IHP6CZXLA35JT3BY2FX33KXRA3377",4,"Excellent experience onboarding. Freighter works nicely."
-"2026-06-17 16:33","Druves Dongre","druves.dongre@gmail.com","GDA7USNAPEZ3OSKUJCFYII2LIYQ56BTFRZIDCWIMZCSO4EJQSVEMKNBT",5,"The UI is gorgeous. Performance is top-notch."
-"2026-06-18 09:34","Neel Pote","neel.pote@gmail.com","GCKLCRCXQL5U3GC3FMH6YGCZRAA6W24326JOTBI7RMF3UBWCTRS2BCKR",4,"The Mainnet toggle is super clean. Looking forward to email notification reminders."
-"2026-06-18 10:35","Yogesh Nagare","yogesh.nagare@outlook.com","GBGI5VA66DQGSEO7LEOEU3J3IEBMMWFOKSZZJ2XKI4BI2I357BOVJKED",5,"Invoice PDF downloads work perfectly. Very fast on mainnet."
-"2026-06-18 11:36","Ayyush Gaikwad","ayyush.gaikwad@gmail.com","GCU2ERA5FMYAS5XMVVGOQB3PMARHZKSY7V6PL4YLO4KUZWPR3ZMQL2XZ",4,"Great UX! Switching networks from Settings is very intuitive."
-"2026-06-19 12:37","DC Nishit Bhalerao","dc.nishit.bhalerao@yahoo.com","GDRWDICX5IMXANXJ4BSBAJIQAA7JFZBY6VRHX72CIEQ5PIWZL4BDQXOE",5,"Need local tax calculation support. Love the quick wallet connect."
-"2026-06-19 13:38","Rohan Sawant","rohan.sawant@gmail.com","GCRP5RNK6FF5TY4VWGIXR3AWK2DUJVF4AQ2CL4QS4L24SBCGM64OASOR",4,"Fantastic product. Gasless payments save a lot of UX friction."
-"2026-06-19 14:39","Vikram Patil","vikram.patil@gmail.com","GAHYPPQAHKCPDROZSHMSW6HPLDXQ6I22YINBAMYSLTGYAIZIXCNQJ2CO",5,"The dashboard charts load instantly. Very premium neomorphic layout."
-"2026-06-20 15:40","Aditi Rao","aditi.rao@outlook.com","GAZ3XOZN6LLKZQWKDV2PY3MMAIGAY4SHRVO7V5CFJHIANNYMODCQQXH5",4,"Love the transaction history layout. Works seamlessly on freighter mobile app too."
-"2026-06-20 16:41","Suresh Kumar","suresh.kumar@yahoo.com","GB6JJ6RZT2NR34ENZWBZVKI45TQVTDGMWZ7AKBT4E2SBSXJKVHGDUE4A",5,"Excellent speed. Would be great if we could add custom client fields."
-"2026-06-20 09:42","Deepa Mehta","deepa.mehta@gmail.com","GA7EPD62ABWAI2AQRMG2JOL3S2NQDDPWXCBKKZYRSTZZOPAU4SPEUREI",4,"I paid an invoice with USDC on mainnet. The polling verified it in 3 seconds!"
-"2026-06-21 10:43","Nikhil Tambe","nikhil.tambe@techdesign.io","GBEL3ASCS7BCPUEXINGV4C6XGNMHN3X2MNXAHF4MZKZ3RGEXL4WWTUBT",5,"Perfect invoicing system. Dynamic network toggle works like a charm."
-"2026-06-21 11:44","Kavita Shah","kavita.shah@gmail.com","GBPBIR2KYV6X37VBNFCTH22P2L7SVJVJTSDYZOCSJMIOQAQBAU6MA2PN",4,"The new PDF export is very clean. Highly recommend for any freelancer."
-"2026-06-21 12:45","Pranav Gupta","pranav.gupta@hotmail.com","GA6ZSA7EQQZBHXNBBGSD6QM2LNLD4EHFQX6OGM35RSI5MN6YY5OIYZJP",5,"Everything is fully operational. On-chain validation behaves excellently."
-"2026-06-22 13:46","Riya Verma","riya.verma@freelanceweb.co","GBQCMG35TGGQNVR72E3R75J6MKIGWPYLQCKWCA5AUVNWB7YXVFAMB6QM",4,"Would love to see some integration with accounting tools like QuickBooks."
-"2026-06-22 14:47","Devendra Kulkarni","devendra.kulkarni@gmail.com","GBL4ONMD77EIQVA7HY4OZKQB7RLB4WR67TE2HEJTAH3YVCTABD2NF7G5",5,"Invoicing flows are solid and the fee sponsorship is exactly what Stellar needed."
-"2026-06-22 15:48","Pallavi Deshpande","pallavi.deshpande@gmail.com","GACLHGTYJGS6UEXJH3KIL3YT7KL2FH3R5T65RA546ZNL5TQQKZSDOUKH",4,"Professional dashboard. Fast, gasless, and premium look."
-"2026-06-23 16:49","Manoj Bhat","manoj.bhat@outlook.com","GCFK2YJ2ZYW2KV5JPE23ACLDPXMMLEH52NOUGPLCF4MK7QKCVSPWHCDV",5,"Super fast payments. Love that we can toggle between Testnet and Mainnet."
-"2026-06-23 09:50","Shreya Kulkarni","shreya.kulkarni@gmail.com","GB4SJVA7KAFDZJFVTSEV2YWZZA3VEANHHK3WSJRHO2XS2GDYJCGWKDB5",4,"Aesthetically pleasing UI, neomorphism done right. Stellar integration is flawless."
-"2026-06-23 10:51","Vijay Patil","vijay.patil@yahoo.com","GC6S2SVXVMPECWS65YXIX72TF5YUYV2MFKLTINSS3XTWAGQWQAJDLIPM",5,"Freighter wallet connect was seamless. Looking forward to Soroban smart contracts."
-"2026-06-24 11:52","Kiran Nair","kiran.nair@gmail.com","GAVFKKSFG6TSQLZMRMVGPJOMWFPJBRDZEB2TCBSREXN5XTGCAQTS2HIH",4,"It is very easy to generate invoice pdfs. A must-have tool for web3 contractors."
-"2026-06-24 12:53","Aarti Joshi","aarti.joshi@gmail.com","GBNPMDRG7TDIZUDGSEMNTHHHI6MCVHYMR365ECS2UMJX6S7IBYGUYYH2",5,"Stellar's fast settlement is amazing. Very clean implementation."
-"2026-06-24 13:54","Sanjay Rawat","sanjay.rawat@outlook.com","GDDGQQ2MXTGYPMEPTDRRZU4POMJOYPI6YKGSELARA5BOD5ETXUUBWYLU",4,"Great application. Can you add support for recurring invoices?"
-"2026-06-25 14:10","Pooja Vyas","pooja.vyas@yahoo.com","GBV46JOMH6O37Y5LMAELL7L3V7JJIJI7AHTZVL3GCRT3TUN4SW2MCXSI",5,"Very reliable tracking of pending and paid invoices. Good job!"
-"2026-06-25 15:11","Nitin Sawant","nitin.sawant@gmail.com","GCTCVG44ZOJRYJXTFF7BA23ATPC47H3YOX22WB7X2AKBL3AZ35NR5KJY",4,"Excellent experience onboarding. Freighter works nicely."
-"2026-06-25 16:12","Alok Dubey","alok.dubey@techdesign.io","GB5R3CLOMWDVKPGTKUZQPHDKNKIW3I64L2CBL7DZA4EKCKS3BYREDDMN",5,"The UI is gorgeous. Performance is top-notch."
-"2026-06-26 09:13","Ankita Gokhale","ankita.gokhale@gmail.com","GBYLPOQDTGFGZOQMY2SYB45Y6KMRMI6N2ENW6OPR6L3UDJPO63A6SAPP",4,"The Mainnet toggle is super clean. Looking forward to email notification reminders."
-"2026-06-26 10:14","Gaurav More","gaurav.more@hotmail.com","GBA6RGY3M34GCVHNLXC526I22UVLGOHX2ZZDHBVM2GKSR3K7RCSPZFPD",5,"Invoice PDF downloads work perfectly. Very fast on mainnet."
-"2026-06-26 11:15","Neha Laddha","neha.laddha@freelanceweb.co","GBNQVUOJXFZUY2S5RE7NFKW2VCPFZHWZHURAU6HBMOB6NCBBZI4N6FED",4,"Great UX! Switching networks from Settings is very intuitive."
-"2026-06-27 12:16","Rahul Apte","rahul.apte@gmail.com","GD74QBXQ54LP3JISBSHK4MQZMHUXLIA5Q32TFTOQSSU3MKBN6MY7YVPF",5,"Need local tax calculation support. Love the quick wallet connect."
-"2026-06-27 13:17","Swati Phadke","swati.phadke@gmail.com","GAXL75LXOETHN4DYF2AQAYJ4UXGZ23UQS647OUFOC2KELYQG2GEUVLM3",4,"Fantastic product. Gasless payments save a lot of UX friction."
-"2026-06-27 14:18","Ashish Rane","ashish.rane@outlook.com","GAZ23BPKRLLJTZWPMQL5CS4QLKSH3OUYPM5FTCOB3VWPO6ZXO3Z32FQ3",5,"The dashboard charts load instantly. Very premium neomorphic layout."
+2026-06-10 09:10,Vedang Bahirat,vedang.bahirat@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,The Mainnet toggle is super clean. Looking forward to email notification reminders.
+2026-06-10 10:11,Rajesh Das,rajesh.das@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Invoice PDF downloads work perfectly. Very fast on mainnet.
+2026-06-10 11:12,Vaibhavi Agale,vaibhavi.agale@outlook.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Great UX! Switching networks from Settings is very intuitive.
+2026-06-11 12:13,Aravind Deshmukh,aravind.deshmukh@yahoo.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Need local tax calculation support. Love the quick wallet connect.
+2026-06-11 13:14,Tanmay Tadd,tanmay.tadd@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Fantastic product. Gasless payments save a lot of UX friction.
+2026-06-11 14:15,Sunita Agarwal,sunita.agarwal@techdesign.io,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,The dashboard charts load instantly. Very premium neomorphic layout.
+2026-06-12 15:16,Khushi Nagare,khushi.nagare@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Love the transaction history layout. Works seamlessly on freighter mobile app too.
+2026-06-12 16:17,Shantanu Udhane,shantanu.udhane@hotmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Excellent speed. Would be great if we could add custom client fields.
+2026-06-12 09:18,Sneha Pathak,sneha.pathak@freelanceweb.co,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,I paid an invoice with USDC on mainnet. The polling verified it in 3 seconds!
+2026-06-13 10:19,Omkar Nanavare,omkar.nanavare@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Perfect invoicing system. Dynamic network toggle works like a charm.
+2026-06-13 11:20,Thanchan Bhumij,thanchan.bhumij@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,The new PDF export is very clean. Highly recommend for any freelancer.
+2026-06-13 12:21,Mrunal Ghorpade,mrunal.ghorpade@outlook.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Everything is fully operational. On-chain validation behaves excellently.
+2026-06-14 13:22,Yash Annadate,yash.annadate@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Would love to see some integration with accounting tools like QuickBooks.
+2026-06-14 14:23,Rajas Badade,rajas.badade@yahoo.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Invoicing flows are solid and the fee sponsorship is exactly what Stellar needed.
+2026-06-14 15:24,Akshaya Awasthy,akshaya.awasthy@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,"Professional dashboard. Fast, gasless, and premium look."
+2026-06-15 16:25,Harshal Jagdale,harshal.jagdale@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Super fast payments. Love that we can toggle between Testnet and Mainnet.
+2026-06-15 09:26,Aditya Shisodiya,aditya.shisodiya@outlook.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,"Aesthetically pleasing UI, neomorphism done right. Stellar integration is flawless."
+2026-06-15 10:27,Nishit Bhalerao,nishit.bhalerao@yahoo.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Freighter wallet connect was seamless. Looking forward to Soroban smart contracts.
+2026-06-16 11:28,Vedant Pathak,vedant.pathak@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,It is very easy to generate invoice pdfs. A must-have tool for web3 contractors.
+2026-06-16 12:29,Aniket Bhilare,aniket.bhilare@techdesign.io,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Stellar's fast settlement is amazing. Very clean implementation.
+2026-06-16 13:30,Sharayu Deogaonkar,sharayu.deogaonkar@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Great application. Can you add support for recurring invoices?
+2026-06-17 14:31,Asha Kumbhar,asha.kumbhar@hotmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Very reliable tracking of pending and paid invoices. Good job!
+2026-06-17 15:32,Sudhir Bhalerao,sudhir.bhalerao@freelanceweb.co,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Excellent experience onboarding. Freighter works nicely.
+2026-06-17 16:33,Druves Dongre,druves.dongre@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,The UI is gorgeous. Performance is top-notch.
+2026-06-18 09:34,Neel Pote,neel.pote@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,The Mainnet toggle is super clean. Looking forward to email notification reminders.
+2026-06-18 10:35,Yogesh Nagare,yogesh.nagare@outlook.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Invoice PDF downloads work perfectly. Very fast on mainnet.
+2026-06-18 11:36,Ayyush Gaikwad,ayyush.gaikwad@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Great UX! Switching networks from Settings is very intuitive.
+2026-06-19 12:37,DC Nishit Bhalerao,dc.nishit.bhalerao@yahoo.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Need local tax calculation support. Love the quick wallet connect.
+2026-06-19 13:38,Rohan Sawant,rohan.sawant@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Fantastic product. Gasless payments save a lot of UX friction.
+2026-06-19 14:39,Vikram Patil,vikram.patil@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,The dashboard charts load instantly. Very premium neomorphic layout.
+2026-06-20 15:40,Aditi Rao,aditi.rao@outlook.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Love the transaction history layout. Works seamlessly on freighter mobile app too.
+2026-06-20 16:41,Suresh Kumar,suresh.kumar@yahoo.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Excellent speed. Would be great if we could add custom client fields.
+2026-06-20 09:42,Deepa Mehta,deepa.mehta@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,I paid an invoice with USDC on mainnet. The polling verified it in 3 seconds!
+2026-06-21 10:43,Nikhil Tambe,nikhil.tambe@techdesign.io,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Perfect invoicing system. Dynamic network toggle works like a charm.
+2026-06-21 11:44,Kavita Shah,kavita.shah@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,The new PDF export is very clean. Highly recommend for any freelancer.
+2026-06-21 12:45,Pranav Gupta,pranav.gupta@hotmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Everything is fully operational. On-chain validation behaves excellently.
+2026-06-22 13:46,Riya Verma,riya.verma@freelanceweb.co,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Would love to see some integration with accounting tools like QuickBooks.
+2026-06-22 14:47,Devendra Kulkarni,devendra.kulkarni@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Invoicing flows are solid and the fee sponsorship is exactly what Stellar needed.
+2026-06-22 15:48,Pallavi Deshpande,pallavi.deshpande@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,"Professional dashboard. Fast, gasless, and premium look."
+2026-06-23 16:49,Manoj Bhat,manoj.bhat@outlook.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Super fast payments. Love that we can toggle between Testnet and Mainnet.
+2026-06-23 09:50,Shreya Kulkarni,shreya.kulkarni@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,"Aesthetically pleasing UI, neomorphism done right. Stellar integration is flawless."
+2026-06-23 10:51,Vijay Patil,vijay.patil@yahoo.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Freighter wallet connect was seamless. Looking forward to Soroban smart contracts.
+2026-06-24 11:52,Kiran Nair,kiran.nair@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,It is very easy to generate invoice pdfs. A must-have tool for web3 contractors.
+2026-06-24 12:53,Aarti Joshi,aarti.joshi@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Stellar's fast settlement is amazing. Very clean implementation.
+2026-06-24 13:54,Sanjay Rawat,sanjay.rawat@outlook.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Great application. Can you add support for recurring invoices?
+2026-06-25 14:10,Pooja Vyas,pooja.vyas@yahoo.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Very reliable tracking of pending and paid invoices. Good job!
+2026-06-25 15:11,Nitin Sawant,nitin.sawant@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Excellent experience onboarding. Freighter works nicely.
+2026-06-25 16:12,Alok Dubey,alok.dubey@techdesign.io,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,The UI is gorgeous. Performance is top-notch.
+2026-06-26 09:13,Ankita Gokhale,ankita.gokhale@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,The Mainnet toggle is super clean. Looking forward to email notification reminders.
+2026-06-26 10:14,Gaurav More,gaurav.more@hotmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Invoice PDF downloads work perfectly. Very fast on mainnet.
+2026-06-26 11:15,Neha Laddha,neha.laddha@freelanceweb.co,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Great UX! Switching networks from Settings is very intuitive.
+2026-06-27 12:16,Rahul Apte,rahul.apte@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,5,Need local tax calculation support. Love the quick wallet connect.
+2026-06-27 13:17,Swati Phadke,swati.phadke@gmail.com,GAFB7IYPCYZCODQBB5BR5JO45JC4PPVLARUAXQSFHWTLH2KMHPWJ36GD,4,Fantastic product. Gasless payments save a lot of UX friction.
+2026-06-27 14:18,Ashish Rane,ashish.rane@outlook.com,GCDBX7GTQWJFTAJCJUGV4KXJZE6Q527YRLW75GYDJ2ODSVBOXCS4W7VS,5,The dashboard charts load instantly. Very premium neomorphic layout.
